@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <h1>👋 Hi, I am Austin!</h1>
+  <p>I wanted my own place on the web so I made this!</p>
+
+  <h2>🕒 Now</h2>
+  <ul>
+    <li>
+      I am <code id="age">24</code> years old
+    </li>
+    <li>Exploring functional programming and new web tech</li>
+    <li>Working as a software engineer with C++ and</li>
+  </ul>
+
+  <script>
+    function updateAge() {
+      // https://www.epochconverter.com/ for 4/2/1998 0:0:0
+      const timeSinceBirth =
+        Number(new Date()) - Number(new Date(891504000000));
+      const ageNum = (timeSinceBirth / 1000 / 60 / 60 / 24 / 365).toFixed(10);
+      const age = document.getElementById("age");
+      age!.innerText = ageNum;
+      requestAnimationFrame(updateAge);
+    }
+    updateAge();
+  </script>
+</BaseLayout>
