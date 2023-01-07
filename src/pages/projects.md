@@ -5,7 +5,7 @@ title: "projects"
 
 # 💾 Projects
 
-## [HTML5 Snake](https://onsclom.net/html5-snake/)
+## [HTML5 Snake](https://onsclom.github.io/html5-snake/)
 
 Snake made in ~50 lines of readable JavaScript.
 
@@ -17,7 +17,7 @@ Web app that helps split bills for groups.
 
 Competitive variant of Wordle.
 
-## [Animated Text Library](https://onsclom.net/animated-text-framework/)
+## [Animated Text Library](https://onsclom.github.io/animated-text-framework/)
 
 JavaScript library for animated blocks of text.
 
@@ -25,7 +25,7 @@ JavaScript library for animated blocks of text.
 
 Timing based game made with PICO-8.
 
-## [Blunder Puzzles](https://onsclom.net/blunder-chess/)
+## [Blunder Puzzles](https://onsclom.github.io/blunder-chess/)
 
 Puzzles where the goal is to find the worst moves.
 
