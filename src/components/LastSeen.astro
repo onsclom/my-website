@@ -1,0 +1,27 @@
+<p>
+  According to my <a href="https://github.com/onsclom">GitHub</a>, I was last
+  seen working on <a id="last-project" href="">loading...</a>
+  <span id="time-ago"></span>
+</p>
+<script>
+  import TimeAgo from "javascript-time-ago";
+  import en from "javascript-time-ago/locale/en";
+
+  const request = await fetch(
+    "https://api.github.com/users/onsclom/events/public"
+  );
+  const data = await request.json();
+  const lastCommit = data[0];
+  const { repo, created_at } = lastCommit;
+
+  const lastProject = document.getElementById(
+    "last-project"
+  ) as HTMLAnchorElement;
+  const timeSpan = document.getElementById("time-ago") as HTMLSpanElement;
+  lastProject!.innerText = repo.name.split("/")[1];
+  lastProject!.href = `https://github.com/onsclom/${repo.name.split("/")[1]}`;
+
+  TimeAgo.addDefaultLocale(en);
+  const timeAgo = new TimeAgo("en-US");
+  timeSpan.innerText = `${timeAgo.format(new Date(created_at))}`;
+</script>

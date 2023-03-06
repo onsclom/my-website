@@ -3,6 +3,7 @@ layout: ../../layouts/BlogLayout.astro
 title: "Functional Programming - How and Why"
 pubDate: 2023-01-02
 ---
+
 Let's start with an example. In [Advent of Code 2022 day 1](https://adventofcode.com/2022/day/1) we get groups of numbers as input like:
 
 ```

@@ -1,7 +1,14 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import Footer from "../components/Footer.astro";
 const { frontmatter } = Astro.props;
 ---
+
+<nav>
+  <p>
+    <a href="/"> 🏠 onsclom</a>
+  </p>
+</nav>
 
 <BaseLayout title={frontmatter.title}>
   <h1>{frontmatter.title}</h1>

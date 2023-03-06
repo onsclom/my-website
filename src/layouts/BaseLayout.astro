@@ -1,6 +1,6 @@
 ---
 const { title } = Astro.props;
-import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -12,13 +12,15 @@ import Header from "../components/Header.astro";
     <title>{title ? title + " / onsclom" : "onsclom.net"}</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css"
+      href="https://vanillacss.com/vanilla.css"
+      type="text/css"
     />
   </head>
   <body>
-    <Header />
     <main>
       <slot />
+      <hr />
+      <Footer />
     </main>
   </body>
 </html>

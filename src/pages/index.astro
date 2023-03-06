@@ -1,30 +1,65 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Age from "../components/Age.astro";
+import LastSeen from "../components/LastSeen.astro";
+import Project from "../components/Project.astro";
+
+import { getCollection } from "astro:content";
+const writing = await getCollection("writing");
 ---
 
 <BaseLayout>
-  <h1>👋 Hi, I am Austin!</h1>
-  <p>I like programming and making things</p>
+  <h1>👋 Hi, I'm Austin!</h1>
+  <p>I like <b>programming</b> 👨‍💻 and <b>making things</b> 🔨</p>
+  <LastSeen />
+  <Age />
 
-  <h2>🕒 Now</h2>
+  <h2>Projects</h2>
   <ul>
-    <li>
-      I am <code id="age">24</code> years old
-    </li>
-    <li>Exploring functional programming and new web tech</li>
-    <li>Working as a software engineer with C++ and Qt</li>
+    <Project
+      name="🤺 Hone"
+      url="https://hone.onsclom.net/"
+      description="minimalistic fighting game for 2 players"
+    />
+    <Project
+      name="🕒 Wrushle"
+      url="https://wordle-rush.vercel.app/"
+      description="timed variant of Wordle"
+    />
+    <Project
+      name="💵 Bill Splitter"
+      url="https://bill-splitter-eight.vercel.app/"
+      description="tool to help split bills"
+    />
+    <Project
+      name="🧩 Holy Matri(x)mony"
+      url="https://cegexe.itch.io/holymatrixmony"
+      description="puzzle  game which ranked as finalist in GMTK 2022"
+    />
+    <Project
+      name="🚀 Rotato Ship"
+      url="https://cegexe.itch.io/rotato-ship"
+      description="rotating platform which ranked as a finalist in GMTK 2021"
+    />
+    <Project
+      name="♟️ Blunder Puzzles"
+      url="https://onsclom.github.io/blunder-chess/"
+      description="chess puzzles for finding the worst move"
+    />
   </ul>
 
-  <script>
-    function updateAge() {
-      // https://www.epochconverter.com/ for 4/2/1998 0:0:0
-      const timeSinceBirth =
-        Number(new Date()) - Number(new Date(891504000000));
-      const ageNum = (timeSinceBirth / 1000 / 60 / 60 / 24 / 365).toFixed(10);
-      const age = document.getElementById("age");
-      age!.innerText = ageNum;
-      requestAnimationFrame(updateAge);
+  <h2>Writing</h2>
+  <ul>
+    {
+      writing.map((post) => {
+        const formattedDate = new Date(post.data.pubDate).toLocaleDateString();
+        return (
+          <li>
+            <a href={`/posts/${post.slug}`}>{post.data.title}</a>{" "}
+            <i>{formattedDate}</i>
+          </li>
+        );
+      })
     }
-    updateAge();
-  </script>
+  </ul>
 </BaseLayout>
