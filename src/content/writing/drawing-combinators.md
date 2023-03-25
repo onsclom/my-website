@@ -104,7 +104,7 @@ export default [
 
 ![](/images/sketch6.png)
 
-That's pretty cool! Now let's change it up entirely and try something recursive now.
+That's pretty cool! Now let's change it up entirely and try something recursive.
 
 ```ts
 import * as D from "./drawing-combinators"
@@ -147,4 +147,4 @@ export default [
 
 ![](/images/sketch5.png)
 
-Nice! I think this was a successful experiment. Creative coding is always fun, but this library actually made it more fun. It is common to change requirements on the fly when creative coding. Because of that, functional programming is a great fit. Our code becomes composable and reusable by default.
+Nice! I think this was a successful experiment. Creative coding is always fun, but this library made it more fun. Changing requirements on the fly is common when creative coding, so functional programming is a great fit. Our code becomes composable and reusable by default.
