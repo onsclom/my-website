@@ -93,6 +93,8 @@ code, pre {
 }
 code pre , pre code { border: 0; padding: 0; }
 
+pre { margin-bottom: 2rem;}
+
 /* Elements */
 hr {
     background: var(--text-color);
@@ -104,6 +106,7 @@ hr {
 img {
     display: block;
     height: auto; 
+    width: auto;
     max-width: 100%; 
 }
 

@@ -14,3 +14,11 @@ const { frontmatter } = Astro.props;
   <h1>{frontmatter.title}</h1>
   <slot />
 </BaseLayout>
+
+<style is:global>
+  /* TODO: figure out better solution for high DPI images */
+  img {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+</style>

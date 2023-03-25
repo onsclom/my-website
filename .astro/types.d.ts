@@ -67,6 +67,13 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"writing": {
+"drawing-combinators.md": {
+  id: "drawing-combinators.md",
+  slug: "drawing-combinators",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 "functional-programming.md": {
   id: "functional-programming.md",
   slug: "functional-programming",
