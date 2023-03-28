@@ -88,6 +88,13 @@ declare module 'astro:content' {
   collection: "writing",
   data: InferEntrySchema<"writing">
 },
+"simulator-state.md": {
+  id: "simulator-state.md",
+  slug: "simulator-state",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 },
 
 	};
