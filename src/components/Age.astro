@@ -6,17 +6,17 @@
   <small>(based on average age span)</small>
 
   <script>
-    const age = document.getElementById("age");
-    const progress = document.getElementById("progress") as HTMLProgressElement;
+    import dayjs from "dayjs"
+
+    const age = document.getElementById("age")
+    const progress = document.getElementById("progress") as HTMLProgressElement
     function updateAge() {
-      // https://www.epochconverter.com/ for 4/2/1998 0:0:0
-      const timeSinceBirth =
-        Number(new Date()) - Number(new Date(891504000000));
-      const ageNum = timeSinceBirth / 1000 / 60 / 60 / 24 / 365;
-      age!.innerText = ageNum.toFixed(10);
-      progress!.value = (ageNum / 80) * 1000;
-      requestAnimationFrame(updateAge);
+      const birth = dayjs("1998-04-02")
+      const ageNum = dayjs().diff(birth, "year", true)
+      age!.innerText = dayjs().diff(birth, "year", true).toFixed(10)
+      progress!.value = (ageNum / 80) * 1000
+      requestAnimationFrame(updateAge)
     }
-    updateAge();
+    updateAge()
   </script>
 </div>

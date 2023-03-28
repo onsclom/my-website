@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "astro": "^2.0.17",
-    "javascript-time-ago": "^2.5.9"
+    "dayjs": "^1.11.7"
   }
 }

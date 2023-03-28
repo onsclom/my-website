@@ -56,7 +56,7 @@ const writing = await getCollection("writing");
         return (
           <li>
             <a href={`/posts/${post.slug}`}>{post.data.title}</a>{" "}
-            <i>{formattedDate}</i>
+            <small>{formattedDate}</small>
           </li>
         );
       })
