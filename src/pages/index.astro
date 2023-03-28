@@ -1,11 +1,11 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Age from "../components/Age.astro";
-import LastSeen from "../components/LastSeen.astro";
-import Project from "../components/Project.astro";
+import BaseLayout from "../layouts/BaseLayout.astro"
+import Age from "../components/Age.astro"
+import LastSeen from "../components/LastSeen.astro"
+import Project from "../components/Project.astro"
 
-import { getCollection } from "astro:content";
-const writing = await getCollection("writing");
+import { getCollection } from "astro:content"
+const writing = await getCollection("writing")
 ---
 
 <BaseLayout>
@@ -51,15 +51,32 @@ const writing = await getCollection("writing");
   <h2>Writing</h2>
   <ul>
     {
-      writing.map((post) => {
-        const formattedDate = new Date(post.data.pubDate).toLocaleDateString();
-        return (
-          <li>
-            <a href={`/posts/${post.slug}`}>{post.data.title}</a>{" "}
-            <small>{formattedDate}</small>
-          </li>
-        );
-      })
+      writing
+        .sort(
+          (a, b) =>
+            new Date(b.data.pubDate).getTime() -
+            new Date(a.data.pubDate).getTime()
+        )
+        .map((post) => {
+          const formattedDate = new Date(post.data.pubDate).toLocaleDateString()
+          return (
+            <li>
+              <a href={`/posts/${post.slug}`}>{post.data.title}</a>{" "}
+              <small>{formattedDate}</small>
+            </li>
+          )
+        })
     }
   </ul>
 </BaseLayout>
+
+<style>
+  ul > li {
+    list-style-type: none;
+  }
+
+  ul {
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+</style>
