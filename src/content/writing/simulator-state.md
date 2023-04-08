@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/BlogLayout.astro
-title: "Your \"Simulation\" Might Not Need State"
+title: 'Your "Simulation" Might Not Need State'
 pubDate: 2023-03-27
 ---
 
@@ -24,13 +24,11 @@ function update() {
   y += dy
   dvdLogo.style.left = x + "px"
   dvdLogo.style.top = y + "px"
-  if (x < 0 || x + dvdLogo.clientWidth > window.innerWidth) 
-    dx *= -1
-  if (y < 0 || y + dvdLogo.clientHeight > window.innerHeight) 
-    dy *= -1
+  if (x < 0 || x + dvdLogo.clientWidth > window.innerWidth) dx *= -1
+  if (y < 0 || y + dvdLogo.clientHeight > window.innerHeight) dy *= -1
 }
 
-(function loop() {
+;(function loop() {
   update()
   requestAnimationFrame(loop)
 })()
@@ -38,16 +36,16 @@ function update() {
 
 But there's actually a totally different way to do this. First, let's define some things.
 
-* **Animation**: takes time as a parameter and returns an image.
+- **Animation**: takes time as a parameter and returns an image.
 
-* **Simulation**: takes some `state` then returns updated `state` and image.
+- **Simulation**: takes some `state` then returns updated `state` and image.
 
 These types can be defined in TypeScript.
 
 ```ts
 type Animation = (time: number) => Image
 
-type Simulation = <T>(state: T) => { state: T, image: Image }
+type Simulation = <T>(state: T) => { state: T; image: Image }
 ```
 
 <small>(If you don't understand these types it's OK)</small>
@@ -63,7 +61,7 @@ But, it's really not too complex. Let's simplify things by thinking about one di
 ```ts
 function update(time: number) {
   const xRange = window.innerWidth - dvdLogo.clientWidth
-  const x = (time) % (xRange * 2)
+  const x = time % (xRange * 2)
   dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`
 }
 ```
@@ -76,14 +74,14 @@ const dvdLogo = document.getElementById("dvd-logo") as HTMLDivElement
 function update(time: number) {
   const xRange = window.innerWidth - dvdLogo.clientWidth
   const yRange = window.innerHeight - dvdLogo.clientHeight
-  const x = (time) % (xRange * 2)
-  const y = (time) % (yRange * 2)
+  const x = time % (xRange * 2)
+  const y = time % (yRange * 2)
   dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`
   dvdLogo.style.top = `${y <= yRange ? y : yRange * 2 - y}px`
 }
 
-(function loop() {
-  update(Date.now()/10)
+;(function loop() {
+  update(Date.now() / 10)
   requestAnimationFrame(loop)
 })()
 ```
@@ -125,6 +123,8 @@ dvdLogo.style.backgroundColor = colors[randIndex]!
 
 Ok, well, maybe this isn't the best random function. I'm getting a bit lazy now. But I'm sure you get the idea.
 
-Try out the [live demo](/dvd-logo)! Try refreshing the page. The DVD logo *magically* remembers its state!
+Try out the [live demo](/dvd-logo)! Try refreshing the page. The DVD logo _magically_ remembers its state!
 
 Next time you find yourself rushing to use state, try spending some more time at the whiteboard. Not only will it make your code simpler, but it also might make it better.
+
+View discussion for this post at [Hacker News](https://news.ycombinator.com/item?id=35336632).
