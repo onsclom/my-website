@@ -3,13 +3,12 @@ import BaseLayout from "./BaseLayout.astro"
 const { frontmatter } = Astro.props
 ---
 
-<nav>
-  <p>
-    <a href="/"> 🏠 onsclom</a>
-  </p>
-</nav>
-
 <BaseLayout title={frontmatter.title}>
+  <nav>
+    <p>
+      <a href="/"> 🏠 onsclom</a>
+    </p>
+  </nav>
   <h1>{frontmatter.title}</h1>
   <slot />
 </BaseLayout>
