@@ -67,6 +67,13 @@ declare module 'astro:content' {
 
 	const entryMap: {
 		"writing": {
+"animated-text-editor.md": {
+  id: "animated-text-editor.md",
+  slug: "animated-text-editor",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 "drawing-combinators.md": {
   id: "drawing-combinators.md",
   slug: "drawing-combinators",
