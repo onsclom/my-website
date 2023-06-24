@@ -28,6 +28,6 @@ One of my favorite things to code is snake. It is a simple game, but is *any* ga
 
 Think about programming snake in your favorite programming languages. Will you need 3rd party libraries or frameworks? How many tools will you have to use? How shareable will the result be?
 
-I coded snake in  ~50 lines of pretty clear and simple JavaScript. No libraries or frameworks were needed. GitHub pages means I could share it just by sharing the [code](https://github.com/onsclom/html5-snake).  Try it out [here](https://onsclom.net/html5-snake/). If your device has a modern web browser, it will work well.
+I coded snake in  ~50 lines of pretty clear and simple JavaScript. No libraries or frameworks were needed. GitHub pages means I could share it just by sharing the [code](https://github.com/onsclom/html5-snake).  Try it out [here](https://onsclom.github.io/html5-snake/). If your device has a modern web browser, it will work well.
 
 JavaScript is a huge language with *many* rough edges. *But*, some parts are really great. Many people think we need to start over and totally replace JavaScript. I think we should recognize the great parts and build off those.
