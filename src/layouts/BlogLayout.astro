@@ -1,6 +1,14 @@
 ---
 import BaseLayout from "./BaseLayout.astro"
 const { frontmatter } = Astro.props
+const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString(
+  "en-US",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }
+)
 ---
 
 <BaseLayout title={frontmatter.title}>
@@ -9,15 +17,28 @@ const { frontmatter } = Astro.props
       <a href="/"> 🏠 onsclom</a>
     </p>
   </nav>
-  <h1>{frontmatter.title}</h1>
+  <hgroup>
+    <h1>{frontmatter.title}</h1>
+    <h2>Published {formattedDate}</h2>
+  </hgroup>
   <slot />
 </BaseLayout>
 
 <style is:global>
-  /* TODO: figure out better solution for high DPI images */
   img {
-    width: 450px;
+    margin: auto;
+    display: block;
+  }
+
+  iframe {
+    margin: auto;
+    display: block;
+    padding-bottom: 1rem;
     max-width: 100%;
+  }
+
+  .twitter-tweet-rendered {
     margin: 0 auto;
+    padding-bottom: 1rem;
   }
 </style>

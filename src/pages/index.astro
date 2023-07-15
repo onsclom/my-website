@@ -9,68 +9,91 @@ const writing = await getCollection("writing")
 ---
 
 <BaseLayout>
-  <h1>👋 Hi, I'm Austin!</h1>
-  <p>I like <b>programming</b> 👨‍💻 and <b>making things</b> 🔨</p>
-  <LastSeen />
-  <Age />
+  <section>
+    <hgroup>
+      <h1>👋 Hi, I'm Austin!</h1>
+      <h2>A dude who <b>programs</b> 👨‍💻 and <b>makes stuff</b> 🔨</h2>
+    </hgroup>
+    <p></p>
+    <LastSeen />
+    <Age />
+  </section>
 
-  <h2>Projects</h2>
-  <ul>
-    <Project
-      name="🕦 Circle Clock"
-      url="https://circle-clock.onsclom.net/"
-      description="minimalistic timing game"
-    />
-    <Project
-      name="🤺 Hone"
-      url="https://hone.onsclom.net/"
-      description="minimalistic fighting game for 2 players"
-    />
-    <Project
-      name="📝 Wrushle"
-      url="https://wordle-rush.vercel.app/"
-      description="timed variant of Wordle"
-    />
-    <Project
-      name="💵 Bill Splitter"
-      url="https://bill-splitter-eight.vercel.app/"
-      description="tool to help split bills"
-    />
-    <Project
-      name="🧩 Holy Matri(x)mony"
-      url="https://cegexe.itch.io/holymatrixmony"
-      description="puzzle  game which ranked as finalist in GMTK 2021"
-    />
-    <Project
-      name="🚀 Rotato Ship"
-      url="https://cegexe.itch.io/rotato-ship"
-      description="rotating platform which ranked as a finalist in GMTK 2020"
-    />
-    <Project
-      name="♟️ Blunder Puzzles"
-      url="https://onsclom.github.io/blunder-chess/"
-      description="chess puzzles for finding the worst move"
-    />
-  </ul>
+  <section>
+    <hgroup>
+      <h2>💾 Projects</h2>
+      <h3>"Finished" things I'm proud of</h3>
+    </hgroup>
+    <ul>
+      <Project
+        name="🔎 TypeScript JSON Parser"
+        url="https://github.com/onsclom/ts-json-parser"
+        description="RFC 8259 compliant parser written from scratch"
+      />
+      <Project
+        name="🕦 Circle Clock"
+        url="https://circle-clock.onsclom.net/"
+        description="minimalistic timing game"
+      />
+      <Project
+        name="🤺 Hone"
+        url="https://hone.onsclom.net/"
+        description="minimalistic fighting game for 2 players"
+      />
+      <Project
+        name="📝 Wrushle"
+        url="https://wordle-rush.vercel.app/"
+        description="timed variant of Wordle"
+      />
+      <Project
+        name="🐍 HTML5 snake"
+        url="https://onsclom.github.io/html5-snake/"
+        description="snake built with vanilla JS"
+      />
+      <Project
+        name="💵 Bill Splitter"
+        url="https://bill-splitter-eight.vercel.app/"
+        description="tool to help split bills"
+      />
+      <Project
+        name="🧩 Holy Matri(x)mony"
+        url="https://cegexe.itch.io/holymatrixmony"
+        description="puzzle  game which ranked as finalist in GMTK 2021"
+      />
+      <Project
+        name="🚀 Rotato Ship"
+        url="https://cegexe.itch.io/rotato-ship"
+        description="rotating platform which ranked as a finalist in GMTK 2020"
+      />
+      <Project
+        name="♟️ Blunder Puzzles"
+        url="https://onsclom.github.io/blunder-chess/"
+        description="chess puzzles for finding the worst move"
+      />
+    </ul>
+  </section>
 
-  <h2>Writing</h2>
-  <ul>
-    {
-      writing
-        .sort(
-          (a, b) =>
-            new Date(b.data.pubDate).getTime() -
-            new Date(a.data.pubDate).getTime()
-        )
-        .map((post) => {
-          const formattedDate = new Date(post.data.pubDate).toLocaleDateString()
-          return (
-            <li>
-              <a href={`/posts/${post.slug}`}>{post.data.title}</a>{" "}
-              <small>{formattedDate}</small>
-            </li>
+  <section>
+    <hgroup>
+      <h2>📝️ Writing</h2>
+      <h3>Ramblings about programming</h3>
+    </hgroup>
+    <ul>
+      {
+        writing
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).getTime() -
+              new Date(a.data.pubDate).getTime()
           )
-        })
-    }
-  </ul>
+          .map((post) => {
+            return (
+              <li>
+                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              </li>
+            )
+          })
+      }
+    </ul>
+  </section>
 </BaseLayout>
