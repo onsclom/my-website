@@ -88,6 +88,13 @@ declare module 'astro:content' {
   collection: "writing",
   data: InferEntrySchema<"writing">
 },
+"immediate-feedback.md": {
+  id: "immediate-feedback.md",
+  slug: "immediate-feedback",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 "javascript-is-misunderstood.md": {
   id: "javascript-is-misunderstood.md",
   slug: "javascript-is-misunderstood",
