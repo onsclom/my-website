@@ -4,34 +4,25 @@ title: "Make Programming Fun and Get Better in the Process"
 pubDate: 2023-07-16
 ---
 
-Gaming is naturally fun. It feels effortless and exciting. Programming is naturally tedious and hard. Why is this?
+Gaming is naturally fun. It feels effortless and exciting. Programming is naturally tedious and hard. Why is this? Games give **immediate feedback**. Game developers add [game juice](https://garden.bradwoods.io/notes/design/juice) to maximize feedback per input. If you aren’t careful, programming becomes the opposite. I’ll start with an example of a bad feedback loop.
 
-Games give **immediate feedback**. Game developers add [game juice](https://garden.bradwoods.io/notes/design/juice) to maximize feedback per input. If you aren’t careful, programming becomes the opposite. I’ll start with an example of a bad feedback loop.
+My first programming course in university taught us C++. For coding assigments we were instructed to: `ssh` into university server, `nano main.cpp`, edit our code (without any syntax highlighting or linting), save, exit nano, `g++ main.cpp`, then `./a.out`. Needless to say, we all **hated** doing our assignments. Was it good to learn basic unix commands? Sure. Could there have been a better process? Absolutely.
 
-My first programming course in university taught us C++. For coding assigments we were instructed to: `ssh` into university server, `nano main.cpp`, edit our code (without any syntax highlighting or linting), save, exit nano, `g++ main.cpp`, then `./a.out`. 
+Because we did everything through `ssh`, all our actions had latency. Simply typing felt terrible. nano made things worse. Everything we knew about GUI text editors went out the window, so we were 10x slower at editing text. The laborious process of making changes to code, compiling, and running totally ruined the feedback loop. I believe we could have learned faster and more importantly, enjoyed programming, if we used a process that promoted immediate feedback.
 
-Needless to say, we all **hated** doing our assignments. Was it good to learn basic unix commands? Sure. Could there have been a better process? Absolutely.
-
-Because we did everything through `ssh`, all our actions had latency. Simply typing felt terrible. `nano` made things worse. Everything we knew about GUI text editors went out the window, so we were 10x slower at editing text. The laborious process of making changes to code, compiling, and running totally ruined the feedback loop. 
-
-I believe we could have learned faster and more importantly, enjoyed programming, if we used a process that promoted immediate feedback.
-
-19 year old me would be very suprised to hear that I enjoy programming now. I do things like [Advent of Code](https://adventofcode.com/), coding puzzles much like my school assignments, for fun! Also, I make projects not just for the final product, but because I enjoy the process!
-
-I believe immediate feedback is the main factor that caused this change. Here are some ways I’ve found to improve feedback when programming *(in no particular order)*:
-
-### Tests
-
-For the small cost of writing tests, you get a lot of benefits. You can set these tests to rerun on changes. You will see which tests fails, the expected output, and the actual output. Once you solve a problem, you are immediately rewarded with pretty green text.
-
-### Live dev servers
-
-The most common example of this is using `npm run dev` with React. A filewatcher listens for changes to files and updates the pages in the dev server. Great dev servers remember your state in between changes. It's really nice to skip recreating state with manual user input every change.
-
+19 year old me would be very suprised to hear that I actually enjoy programming now. I do things like [Advent of Code](https://adventofcode.com/), coding puzzles much like my school assignments, for fun! Also, I make projects not just for the final product, but because I enjoy the process! I believe immediate feedback is the main factor that caused this change. The following are different ways I foster immediate feedback in programming *(in no particular order)*.
 
 ### Watch files
 
 Finding yourself making changes and rerunning code often? Setup a watcher to rerun your code on changes. [Deno](https://deno.land/) makes this easy with `deno run —-watch`. With Rust code I like to use [cargo-watch](https://github.com/watchexec/cargo-watch). Saving a file and immediately seeing the output of your program is really nice.
+
+### Tests
+
+For the small cost of writing tests, you get a lot of benefits. Combine a filewatcher with tests for a great experience. You will see which tests fails, the expected output, and the actual output. Once you solve a problem, you are immediately rewarded with pretty green text.
+
+### Live code reloading
+
+The most common example of this is using `npm run dev` with React. A filewatcher listens for changes to files and updates the pages in the dev server. Great code reloading remember your state in between changes. It's really nice to skip recreating state with manual user input every change.
 
 ### Minimize boilerplate
 
@@ -57,7 +48,7 @@ Rust does a lot of great stuff at compile time, but this comes at the cost of co
 
 ### Decomposition
 
-Everything above has to do with tooling, but this is something you can do regardless of tools. Big problems equal slow feedback cycles. By breaking big problems into smaller, self-contained problems, you create better feedback cycles.
+Everything above has to do with tooling, but this is something you can do regardless of tools. Big problems create slow feedback cycles. By breaking big problems into smaller, self-contained problems, you create better feedback cycles.
 
 ## But Why
 
