@@ -17,10 +17,8 @@ const formattedDate = new Date(frontmatter.pubDate).toLocaleDateString(
       <a href="/"> 🏠 onsclom</a>
     </p>
   </nav>
-  <hgroup>
-    <h1>{frontmatter.title}</h1>
-    <h2>Published {formattedDate}</h2>
-  </hgroup>
+  <h1>{frontmatter.title}</h1>
+  <i>Published {formattedDate}</i>
   <slot />
 </BaseLayout>
 

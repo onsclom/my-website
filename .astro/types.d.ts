@@ -88,6 +88,13 @@ declare module 'astro:content' {
   collection: "writing",
   data: InferEntrySchema<"writing">
 },
+"great-documentation.md": {
+  id: "great-documentation.md",
+  slug: "great-documentation",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 "immediate-feedback.md": {
   id: "immediate-feedback.md",
   slug: "immediate-feedback",
