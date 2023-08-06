@@ -25,9 +25,9 @@ This was cool and all, but it made me curious. How much faster is this code than
 
 So, I rewrote it in TypeScript. In both versions, I commented out the code that prints the maze, leaving just the generation code. I compiled the C program with `gcc maze.c -O3` for max performance. I ran the TypeScript program with `deno run`. I timed them both using `time` for generating a size 1,000 maze and a size 5,000 maze.
 
-The C code: https://gist.github.com/onsclom/3df0815ed2e3c1f30e8483234e9b643c
+[C code](https://gist.github.com/onsclom/3df0815ed2e3c1f30e8483234e9b643c)
 
-The TypeScript code: https://gist.github.com/onsclom/bf07edb965b33cf05c96eaa31c1f8602
+[TypeScript code](https://gist.github.com/onsclom/bf07edb965b33cf05c96eaa31c1f8602)
 
 `time` results:
 ```
