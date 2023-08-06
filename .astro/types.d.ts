@@ -109,6 +109,13 @@ declare module 'astro:content' {
   collection: "writing",
   data: InferEntrySchema<"writing">
 },
+"maze-generation.md": {
+  id: "maze-generation.md",
+  slug: "maze-generation",
+  body: string,
+  collection: "writing",
+  data: InferEntrySchema<"writing">
+},
 "simulator-state.md": {
   id: "simulator-state.md",
   slug: "simulator-state",
