@@ -68,4 +68,4 @@ This function is starting to look a lot like the orignal for loop solution. It's
 
 The minimalist part of me really enjoys TCO. It enables a language to express complex and efficient programs without imperative loops. In the case of JavaScript, it means a smaller subset of the language can express all programs. Most beginners are taught loop statements as if they are fundamental or required in every language. But that's not true. With TCO, you can express any loop statement using recursion and get similar performance.
 
-Languages that rely on recursion like LISPs often specify that TCO must be implemented in their language spec. Sadly, TCO is only for JavaScript in JavaScriptCore. Thankfully, Bun and Safari use JavaScriptCore!
+Languages that rely on recursion like LISPs often specify that TCO must be implemented in their language spec. Sadly, TCO is only implemented in JavaScriptCore. Thankfully, Bun and Safari use JavaScriptCore!
