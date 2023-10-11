@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/BlogLayout.astro
 title: 'Your "Simulation" Might Not Need State'
 pubDate: 2023-03-27
 ---
@@ -13,25 +12,25 @@ If you haven't already made this DVD bouncing logo, give a try! Really, take a b
 Okay, welcome back! You probably wrote code that works very similar to Daniel's. You need to track the logo's `x`, `y`, `dx`, and `dy`. If the logo hits a side wall you flip its `dx`, and if it hits the ceiling or floor you flip the `dy`. This totally works! Doing this in TypeScript it might look like:
 
 ```ts
-const dvdLogo = document.getElementById("dvd-logo") as HTMLDivElement
-let x = 0
-let y = 0
-let dx = 1
-let dy = 1
+const dvdLogo = document.getElementById('dvd-logo') as HTMLDivElement;
+let x = 0;
+let y = 0;
+let dx = 1;
+let dy = 1;
 
 function update() {
-  x += dx
-  y += dy
-  dvdLogo.style.left = x + "px"
-  dvdLogo.style.top = y + "px"
-  if (x < 0 || x + dvdLogo.clientWidth > window.innerWidth) dx *= -1
-  if (y < 0 || y + dvdLogo.clientHeight > window.innerHeight) dy *= -1
+	x += dx;
+	y += dy;
+	dvdLogo.style.left = x + 'px';
+	dvdLogo.style.top = y + 'px';
+	if (x < 0 || x + dvdLogo.clientWidth > window.innerWidth) dx *= -1;
+	if (y < 0 || y + dvdLogo.clientHeight > window.innerHeight) dy *= -1;
 }
 
-;(function loop() {
-  update()
-  requestAnimationFrame(loop)
-})()
+(function loop() {
+	update();
+	requestAnimationFrame(loop);
+})();
 ```
 
 But there's actually a totally different way to do this. First, let's define some things.
@@ -43,9 +42,9 @@ But there's actually a totally different way to do this. First, let's define som
 These types can be defined in TypeScript.
 
 ```ts
-type Animation = (time: number) => Image
+type Animation = (time: number) => Image;
 
-type Simulation = <T>(state: T) => { state: T; image: Image }
+type Simulation = <T>(state: T) => { state: T; image: Image };
 ```
 
 <small>(If you don't understand these types it's OK)</small>
@@ -60,30 +59,30 @@ But, it's really not too complex. Let's simplify things by thinking about one di
 
 ```ts
 function update(time: number) {
-  const xRange = window.innerWidth - dvdLogo.clientWidth
-  const x = time % (xRange * 2)
-  dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`
+	const xRange = window.innerWidth - dvdLogo.clientWidth;
+	const x = time % (xRange * 2);
+	dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`;
 }
 ```
 
 A little math goes a long way! Isn't that cool? You can probably guess how to calculate the `y` position now. Here's the full solution.
 
 ```ts
-const dvdLogo = document.getElementById("dvd-logo") as HTMLDivElement
+const dvdLogo = document.getElementById('dvd-logo') as HTMLDivElement;
 
 function update(time: number) {
-  const xRange = window.innerWidth - dvdLogo.clientWidth
-  const yRange = window.innerHeight - dvdLogo.clientHeight
-  const x = time % (xRange * 2)
-  const y = time % (yRange * 2)
-  dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`
-  dvdLogo.style.top = `${y <= yRange ? y : yRange * 2 - y}px`
+	const xRange = window.innerWidth - dvdLogo.clientWidth;
+	const yRange = window.innerHeight - dvdLogo.clientHeight;
+	const x = time % (xRange * 2);
+	const y = time % (yRange * 2);
+	dvdLogo.style.left = `${x <= xRange ? x : xRange * 2 - x}px`;
+	dvdLogo.style.top = `${y <= yRange ? y : yRange * 2 - y}px`;
 }
 
-;(function loop() {
-  update(Date.now() / 10)
-  requestAnimationFrame(loop)
-})()
+(function loop() {
+	update(Date.now() / 10);
+	requestAnimationFrame(loop);
+})();
 ```
 
 We converted our previous `Simulation` into an `Animation`. Instead of maintaing state, we calculate positions using just `time`. Not only did we make the code simpler, but we also made the code function better!
@@ -101,14 +100,14 @@ But wait, we can take this DVD example further! The DVD logo changes color every
 Actually, it's possible to calculate the amount of bounces that happened since `time` equalled 0.
 
 ```ts
-const bounces = Math.floor(time / xRange) + Math.floor(time / yRange)
+const bounces = Math.floor(time / xRange) + Math.floor(time / yRange);
 ```
 
 And we can use that to choose a color.
 
 ```ts
-const colors = ["red", "green", "blue", "yellow"]
-dvdLogo.style.backgroundColor = colors[bounces % colors.length]!
+const colors = ['red', 'green', 'blue', 'yellow'];
+dvdLogo.style.backgroundColor = colors[bounces % colors.length]!;
 ```
 
 Isn't that cool?! Or maybe you think we've been getting really lucky with these examples. Maybe you remembered something tricky. The actual DVD logo picks a color randomly. You probably think this is where we are finally stumped.
@@ -116,9 +115,9 @@ Isn't that cool?! Or maybe you think we've been getting really lucky with these 
 Well, with a seeded random function this is possible too!
 
 ```ts
-const random = (seed: number) => Math.sin(seed * 1000) * 0.5 + 0.5
-const randIndex = Math.floor(random(bounces) * colors.length)
-dvdLogo.style.backgroundColor = colors[randIndex]!
+const random = (seed: number) => Math.sin(seed * 1000) * 0.5 + 0.5;
+const randIndex = Math.floor(random(bounces) * colors.length);
+dvdLogo.style.backgroundColor = colors[randIndex]!;
 ```
 
 Ok, well, maybe this isn't the best random function. I'm getting a bit lazy now. But I'm sure you get the idea.

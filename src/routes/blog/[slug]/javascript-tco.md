@@ -1,6 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "Bun, Javascript, and TCO"
+title: 'Bun, Javascript, and TCO'
 pubDate: 2023-09-09
 ---
 
@@ -21,24 +20,23 @@ Let's dive in by writing some real code! Imagine you need to implement the follo
     count(5) => [1, 2, 3, 4, 5]
     count(-1) => []
 */
-function count(amount: number): number[]
+function count(amount: number): number[];
 ```
 
 Give it a try yourself if you want! I imagine most people will come up with a solution like:
 
 ```ts
 function count(amount: number): number[] {
-  let nums: number[] = []
-  for (let i = 1; i <= amount; i++) nums.push(i)
-  return nums
+	let nums: number[] = [];
+	for (let i = 1; i <= amount; i++) nums.push(i);
+	return nums;
 }
 ```
 
 This is a great solution that works totally fine! But now, I will present an arbitrary challenge so to introduce tail call optimization. Can you represent this as recursive function? Give it a try, or don't... I'm not your mom. After a bit of thinking, you might come up with this:
 
 ```ts
-const count = (amount: number) =>
-  amount > 0 ? [...count(amount - 1), amount] : []
+const count = (amount: number) => (amount > 0 ? [...count(amount - 1), amount] : []);
 ```
 
 Look at that succinct solution! It might look familiar to recurrence relations from math class. You might be thinking, "It looks like loops can be expressed more elegantly with recursion!" But, now I have something sad to share. Try doing `count(100000)` (Deno and Bun allow running TypeScript directly). You will get an error like `Maximum call stack size exceeded`.
@@ -49,7 +47,7 @@ The process of rewriting a function to be tail call optmized generally involves 
 
 ```ts
 const count = (amount: number, cur: number[] = []) =>
-  cur.length >= amount ? cur : count(amount, [...cur, cur.length + 1])
+	cur.length >= amount ? cur : count(amount, [...cur, cur.length + 1]);
 ```
 
 Slightly less succint and elegant, but it can be tail call optimized now! If we run `count(100000)` with Deno, we still get `error: Uncaught RangeError: Maximum call stack size exceeded`. With Bun, the program now successfully runs! But there's still one more problem... This solution is really slow.
@@ -58,9 +56,9 @@ Slightly less succint and elegant, but it can be tail call optimized now! If we 
 
 ```ts
 function count(amount: number, cur: number[] = []) {
-  if (cur.length >= amount) return cur
-  cur.push(cur.length + 1)
-  return count(amount, cur)
+	if (cur.length >= amount) return cur;
+	cur.push(cur.length + 1);
+	return count(amount, cur);
 }
 ```
 

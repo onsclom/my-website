@@ -1,6 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "C vs TypeScript Performance"
+title: 'C vs TypeScript Performance'
 pubDate: 2023-08-05
 ---
 
@@ -30,13 +29,14 @@ So, I rewrote it in TypeScript. In both versions, I commented out the code that 
 [TypeScript code](https://gist.github.com/onsclom/bf07edb965b33cf05c96eaa31c1f8602)
 
 `time` results:
+
 ```
 size of 1000:
 
-  ./maze 1000  
+  ./maze 1000
   0.05s user 0.01s system 9% cpu 0.544 total
 
-  deno run maze.ts 1000 
+  deno run maze.ts 1000
   0.18s user 0.04s system 123% cpu 0.179 total
 
 size of 5000:
@@ -44,7 +44,7 @@ size of 5000:
   ./maze 5000
   0.66s user 0.06s system 99% cpu 0.725 total
 
-  deno run maze.ts 5000  
+  deno run maze.ts 5000
   3.81s user 0.46s system 114% cpu 3.739 total
 ```
 

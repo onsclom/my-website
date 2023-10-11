@@ -1,6 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "Make Programming Fun and Get Better in the Process"
+title: 'Make Programming Fun and Get Better in the Process'
 pubDate: 2023-07-16
 ---
 
@@ -10,7 +9,7 @@ My first programming course in university taught us C++. For coding assigments w
 
 Because we did everything through `ssh`, all our actions had latency. Simply typing felt terrible. nano made things worse. Everything we knew about GUI text editors went out the window, so we were 10x slower at editing text. The laborious process of making changes to code, compiling, and running totally ruined the feedback loop. I believe we could have learned faster and more importantly, enjoyed programming, if we used a process that promoted immediate feedback.
 
-19 year old me would be very suprised to hear that I actually enjoy programming now. I do things like [Advent of Code](https://adventofcode.com/), coding puzzles much like my school assignments, for fun! Also, I make projects not just for the final product, but because I enjoy the process! I believe immediate feedback is the main factor that caused this change. The following are different ways I foster immediate feedback in programming *(in no particular order)*.
+19 year old me would be very suprised to hear that I actually enjoy programming now. I do things like [Advent of Code](https://adventofcode.com/), coding puzzles much like my school assignments, for fun! Also, I make projects not just for the final product, but because I enjoy the process! I believe immediate feedback is the main factor that caused this change. The following are different ways I foster immediate feedback in programming _(in no particular order)_.
 
 ### Watch files
 
@@ -30,7 +29,7 @@ If you need to make a new class and `public static void main` for simple things,
 
 ### Linters
 
-Good linters are amazing. They tell you when you make mistakes immediately in your editor. They have great error messages, and maybe even suggest alternative approaches. However, good linters take nuance. It’s possible to create linter configs which worsen the feedback cycle. 
+Good linters are amazing. They tell you when you make mistakes immediately in your editor. They have great error messages, and maybe even suggest alternative approaches. However, good linters take nuance. It’s possible to create linter configs which worsen the feedback cycle.
 
 ### Static typing
 
@@ -52,7 +51,7 @@ Everything above has to do with tooling, but this is something you can do regard
 
 ## But Why
 
-*Why* does immediate feedback make things so much better? To be honest I'm not completely sure, but I have a hypothesis: Having fun and learning is very much an unconscious process. High quality immediate feedback helps the unconscious brain thrive.
+_Why_ does immediate feedback make things so much better? To be honest I'm not completely sure, but I have a hypothesis: Having fun and learning is very much an unconscious process. High quality immediate feedback helps the unconscious brain thrive.
 
 ## Conclusion
 

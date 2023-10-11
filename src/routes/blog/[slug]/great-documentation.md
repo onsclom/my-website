@@ -1,10 +1,9 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "Great Documentation"
+title: 'Great Documentation'
 pubDate: 2023-07-22
 ---
 
-Documentation is where we spend a large portion of our time as programmers. If you aren't spending large portions of time in documentation, then maybe the documentation for your tools are bad. Or maybe you've mastered your tools. Why not learn new tools? Perhaps ones with great documentation! Great documentation teaches you new paradigms of thinking. Great documentation inspires you to build things. Great documentation is **official**, **interactive**, and **open-source**. 
+Documentation is where we spend a large portion of our time as programmers. If you aren't spending large portions of time in documentation, then maybe the documentation for your tools are bad. Or maybe you've mastered your tools. Why not learn new tools? Perhaps ones with great documentation! Great documentation teaches you new paradigms of thinking. Great documentation inspires you to build things. Great documentation is **official**, **interactive**, and **open-source**.
 
 ## Official
 
@@ -22,15 +21,15 @@ Good documentation should be open source. Experts should be able to make correct
 
 The following is an eclectic list of tools that I think have great documentation (in no particular order).
 
-* [raylib](https://www.raylib.com/)
-* [Godot](https://godotengine.org/)
-* [Rust](https://www.rust-lang.org/)
-* [Janet](https://janet-lang.org/)
-* [p5.js](https://p5js.org/)
-* [Tailwind](https://tailwindcss.com/)
-* [Deno](https://deno.land/)
-* [React](https://react.dev/)
-* [Svelte](https://svelte.dev/)
-* [The Web](https://developer.mozilla.org/en-US/) (Well ok... it's MDN. Can we just call MDN the official docs of the web?)
+- [raylib](https://www.raylib.com/)
+- [Godot](https://godotengine.org/)
+- [Rust](https://www.rust-lang.org/)
+- [Janet](https://janet-lang.org/)
+- [p5.js](https://p5js.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Deno](https://deno.land/)
+- [React](https://react.dev/)
+- [Svelte](https://svelte.dev/)
+- [The Web](https://developer.mozilla.org/en-US/) (Well ok... it's MDN. Can we just call MDN the official docs of the web?)
 
 I hope these pages inspire you to learn something interesting or build something cool!

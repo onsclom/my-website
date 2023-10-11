@@ -1,6 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "Functional Programming - How and Why"
+title: 'Functional Programming - How and Why'
 pubDate: 2023-01-02
 ---
 
@@ -28,31 +27,31 @@ We want a program that sums up each group and returns the largest. The largest i
 Here is an imperative solution:
 
 ```js
-const input = $("pre").innerText
-let runningMax = 0
-for (let group of input.split("\n\n")) {
-  let runningSum = 0
-  for (let num of group.split("\n")) runningSum += Number(num)
-  runningMax = Math.max(runningMax, runningSum)
+const input = $('pre').innerText;
+let runningMax = 0;
+for (let group of input.split('\n\n')) {
+	let runningSum = 0;
+	for (let num of group.split('\n')) runningSum += Number(num);
+	runningMax = Math.max(runningMax, runningSum);
 }
-console.log(runningMax)
+console.log(runningMax);
 ```
 
 Here is a functional solution:
 
 ```js
-const input = $("pre").innerText
+const input = $('pre').innerText;
 function sumGroup(group) {
-  return group
-    .split("\n")
-    .map(Number)
-    .reduce((a, b) => a + b)
+	return group
+		.split('\n')
+		.map(Number)
+		.reduce((a, b) => a + b);
 }
 const sortedGroups = input
-  .split("\n\n")
-  .map(sumGroup)
-  .sort((a, b) => a - b)
-console.log(sortedGroups.at(-1))
+	.split('\n\n')
+	.map(sumGroup)
+	.sort((a, b) => a - b);
+console.log(sortedGroups.at(-1));
 ```
 
 The imperative solution:
@@ -84,9 +83,9 @@ Imperative solution:
 
 ```js
 function range(end) {
-  let nums = []
-  for (let i = 1; i <= end; i++) nums.push(i)
-  return nums
+	let nums = [];
+	for (let i = 1; i <= end; i++) nums.push(i);
+	return nums;
 }
 ```
 
@@ -94,8 +93,8 @@ Functional solution:
 
 ```js
 function range(end, cur = []) {
-  if (cur.length >= end) return cur
-  return range(end, [...cur, cur.length + 1])
+	if (cur.length >= end) return cur;
+	return range(end, [...cur, cur.length + 1]);
 }
 ```
 
