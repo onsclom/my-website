@@ -122,8 +122,6 @@ dvdLogo.style.backgroundColor = colors[randIndex]!;
 
 Ok, well, maybe this isn't the best random function. I'm getting a bit lazy now. But I'm sure you get the idea.
 
-Try out the [live demo](/dvd-logo)! Try refreshing the page. The DVD logo _magically_ remembers its state!
-
 Next time you find yourself rushing to use state, try spending some more time at the whiteboard. Not only will it make your code simpler, but it also might make it better.
 
 View discussion for this post at [Hacker News](https://news.ycombinator.com/item?id=35336632).
