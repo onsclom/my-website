@@ -1,6 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
-title: "Making an Animated Text Editor"
+title: 'Making an Animated Text Editor'
 pubDate: 2023-06-18
 ---
 
