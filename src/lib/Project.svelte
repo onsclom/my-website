@@ -7,7 +7,7 @@
 
 <a
 	href={url}
-	class="flex flex-col p-4 no-underline transition-colors border-2 rounded-lg hover:bg-slate-200"
+	class="flex flex-col p-2 no-underline transition-colors border-2 rounded-lg sm:p-4 text-ellipsis whitespace-nowrap hover:bg-slate-100"
 >
 	<div class="flex space-x-2 font-bold">
 		<div>{emoji}</div>

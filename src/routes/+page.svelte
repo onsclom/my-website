@@ -2,11 +2,10 @@
 	import Project from '$lib/Project.svelte';
 	export let data;
 
-	const posts = import.meta.glob('/src/posts/*.md');
-	console.log(posts);
+	const posts = data.props.posts;
 </script>
 
-<main class="max-w-2xl px-4 pt-20 pb-10 m-auto prose">
+<main class="max-w-2xl px-4 pt-20 m-auto prose">
 	<h1>Austin Merrick</h1>
 
 	<!-- 
@@ -21,7 +20,7 @@
 
 	<h2>Projects</h2>
 
-	<div class="grid gap-3 sm:grid-cols-2">
+	<div class="grid gap-4 sm:grid-cols-2">
 		<Project
 			emoji="💧"
 			name="H2OPowerPro.com"
@@ -47,7 +46,7 @@
 			emoji="🧩"
 			name="Holy Matri(x)mony"
 			desc="Finalist in GMTK 2021"
-			url="https://onsclom.github.io/html5-snake/"
+			url="https://cegexe.itch.io/holymatrixmony/"
 		/>
 
 		<Project
@@ -67,5 +66,23 @@
 
 	<h2>Writing</h2>
 
-	<footer class="italic text-center">Website made with ❤️ by me.</footer>
+	<div class="space-y-2">
+		{#each posts as post}
+			<a
+				href={`/blog/${post.slug}`}
+				class="flex flex-col p-2 no-underline transition-colors hover:bg-slate-100 sm:flex-row sm:space-x-2"
+			>
+				<div class="font-light text-slate-600">
+					{post.pubDate.toLocaleDateString('en-US', {
+						year: 'numeric',
+						month: 'short',
+						day: 'numeric'
+					})}
+				</div>
+				<div>{post.title}</div>
+			</a>
+		{/each}
+	</div>
+
+	<footer class="pt-10 pb-5 italic text-center">Website made with ❤️ by me.</footer>
 </main>
