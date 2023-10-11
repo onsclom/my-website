@@ -5,7 +5,7 @@
 	const posts = data.props.posts;
 </script>
 
-<main class="max-w-2xl px-4 pt-20 m-auto prose">
+<main class="max-w-2xl px-4 pt-20 m-auto prose lg:max-w-4xl lg:prose-lg">
 	<h1>Austin Merrick</h1>
 
 	<!-- 
