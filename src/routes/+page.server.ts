@@ -1,5 +1,5 @@
 export async function load() {
-	const paths = import.meta.glob('/src/routes/blog/[slug]/*.md', { eager: true });
+	const paths = import.meta.glob('/src/routes/posts/[slug]/*.md', { eager: true });
 
 	type Post = {
 		title: string;

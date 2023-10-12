@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let data;
-	const posts = import.meta.glob('/src/routes/blog/[slug]/*.md', { eager: true });
-	const post: any = posts[`/src/routes/blog/[slug]/${data.slug}.md`];
+	const posts = import.meta.glob('./*.md', { eager: true });
+	const post: any = posts[`./${data.slug}.md`];
 	const title = post.metadata.title;
 </script>
 

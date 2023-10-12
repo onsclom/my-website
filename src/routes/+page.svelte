@@ -61,7 +61,7 @@
 <div class="space-y-2">
 	{#each posts as post}
 		<a
-			href={`/blog/${post.slug}`}
+			href={`/posts/${post.slug}`}
 			class="flex flex-col p-2 no-underline transition-colors hover:bg-slate-100 sm:flex-row sm:space-x-2 dark:hover:bg-slate-800"
 		>
 			<div class="font-light text-slate-600 dark:text-slate-300">
