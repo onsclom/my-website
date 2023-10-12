@@ -1,5 +1,19 @@
 <script>
 	import '../app.postcss';
+	import { onNavigate } from '$app/navigation';
+
+	onNavigate((navigation) => {
+		// @ts-ignore
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			// @ts-ignore
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <main class="max-w-2xl px-4 pt-20 m-auto prose lg:max-w-4xl lg:prose-lg dark:prose-invert">

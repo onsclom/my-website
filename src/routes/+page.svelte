@@ -71,7 +71,9 @@
 					day: 'numeric'
 				})}
 			</div>
-			<div>{post.title}</div>
+			<div style={`view-transition-name: ${post.slug}`}>
+				{post.title}
+			</div>
 		</a>
 	{/each}
 </div>

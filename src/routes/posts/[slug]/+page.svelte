@@ -9,7 +9,7 @@
 	<title>{title}</title>
 </svelte:head>
 
-<h1>
+<h1 style={`view-transition-name: ${data.slug}`}>
 	{title}
 </h1>
 
