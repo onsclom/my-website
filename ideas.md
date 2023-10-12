@@ -1,2 +1,3 @@
 - dark mode
 - more interesting background
+- add syntax highlighting in blogs

@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Austin Merrick</title>
+	<title>onsclom</title>
 </svelte:head>
 
 <h1>Austin Merrick</h1>

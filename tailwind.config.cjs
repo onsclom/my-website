@@ -6,6 +6,9 @@ const config = {
 		extend: {}
 	},
 
+	// TODO: make toggleable in site
+	// darkMode: 'class',
+
 	plugins: [require('@tailwindcss/typography')]
 };
 
