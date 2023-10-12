@@ -1,0 +1,2 @@
+- dark mode
+- more interesting background

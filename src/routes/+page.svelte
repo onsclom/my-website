@@ -62,9 +62,9 @@
 	{#each posts as post}
 		<a
 			href={`/blog/${post.slug}`}
-			class="flex flex-col p-2 no-underline transition-colors hover:bg-slate-100 sm:flex-row sm:space-x-2"
+			class="flex flex-col p-2 no-underline transition-colors hover:bg-slate-100 sm:flex-row sm:space-x-2 dark:hover:bg-slate-800"
 		>
-			<div class="font-light text-slate-600">
+			<div class="font-light text-slate-600 dark:text-slate-300">
 				{post.pubDate.toLocaleDateString('en-US', {
 					year: 'numeric',
 					month: 'short',
