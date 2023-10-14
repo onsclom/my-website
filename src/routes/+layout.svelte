@@ -16,7 +16,7 @@
 	});
 </script>
 
-<main class="max-w-2xl px-4 m-auto prose pt-14 lg:max-w-4xl lg:prose-lg dark:prose-invert">
+<main class="prose m-auto max-w-2xl px-4 pt-14 dark:prose-invert lg:prose-lg lg:max-w-4xl">
 	<slot />
-	<footer class="pt-10 pb-5 italic text-center">Website made with ❤️ by me.</footer>
+	<footer class="pb-5 pt-10 text-center italic">Website made with ❤️ by me.</footer>
 </main>
