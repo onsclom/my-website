@@ -1,5 +1,3 @@
-const posts = import.meta.glob(`./*.md`, { eager: true });
-
-export function load({ params }) {
-	return { post: posts[`./${params.slug}.md`] };
+export async function load({ params }) {
+	return { post: await import(`./${params.slug}.md`) };
 }
