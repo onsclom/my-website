@@ -2,58 +2,63 @@
 	import Project from '$lib/Project.svelte';
 	export let data;
 	const posts = data.posts;
+
+	const projects = [
+		{
+			emoji: '💧',
+			name: 'H2OPowerPro.com',
+			desc: 'Professional power washing site',
+			url: 'https://www.h2opowerpro.com/'
+		},
+		{
+			emoji: '📝',
+			name: 'Smooth Text Editor',
+			desc: 'Animation experiment',
+			url: 'https://canvas-text-editor.vercel.app/'
+		},
+		{
+			emoji: '🕦',
+			name: 'Circle Clock',
+			desc: 'Minimalist browser game',
+			url: 'https://circle-clock.onsclom.net/'
+		},
+		{
+			emoji: '🧩',
+			name: 'Holy Matri(x)mony',
+			desc: 'Finalist in GMTK 2021',
+			url: 'https://cegexe.itch.io/holymatrixmony/'
+		},
+		{
+			emoji: '📺',
+			name: 'Animated Text Canvas',
+			desc: 'JavaScript library',
+			url: 'https://onsclom.github.io/animated-text-framework//'
+		},
+		{
+			emoji: '♟️',
+			name: 'Blunder Puzzles',
+			desc: 'Reverse chess puzzles',
+			url: 'https://onsclom.github.io/blunder-chess/'
+		}
+	];
 </script>
 
 <svelte:head>
 	<title>onsclom</title>
 </svelte:head>
 
-<h1>Austin Merrick</h1>
+<hgroup>
+	<h1 class="mb-6">Hi, I'm Austin Merrick</h1>
+	<!-- TODO: make this a typewriter effect that goes through a list! -->
+	<h2 class="mt-3 text-slate-700 dark:text-slate-300">I enjoy making things</h2>
+</hgroup>
 
 <h2>Projects</h2>
 
 <div class="grid gap-4 sm:grid-cols-2">
-	<Project
-		emoji="💧"
-		name="H2OPowerPro.com"
-		desc="Power washing site"
-		url="https://www.h2opowerpro.com/"
-	/>
-
-	<Project
-		emoji="🔎"
-		name="TypeScript JSON Parser"
-		desc="RFC 8259 compliant parser"
-		url="https://github.com/onsclom/ts-json-parser"
-	/>
-
-	<Project
-		emoji="🕦"
-		name="Circle Clock"
-		desc="Minimalist timing game"
-		url="https://circle-clock.onsclom.net/"
-	/>
-
-	<Project
-		emoji="🧩"
-		name="Holy Matri(x)mony"
-		desc="Finalist in GMTK 2021"
-		url="https://cegexe.itch.io/holymatrixmony/"
-	/>
-
-	<Project
-		emoji="🐍"
-		name="HTML5 snake"
-		desc="Snake built with vanilla JS"
-		url="https://onsclom.github.io/html5-snake/"
-	/>
-
-	<Project
-		emoji="♟️"
-		name="Blunder Puzzles"
-		desc="Reverse chess puzzles"
-		url="https://onsclom.github.io/blunder-chess/"
-	/>
+	{#each projects as project}
+		<Project {...project} />
+	{/each}
 </div>
 
 <h2>Writing</h2>

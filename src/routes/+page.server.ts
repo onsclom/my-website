@@ -1,32 +1,19 @@
 export async function load() {
-	const paths = import.meta.glob('/src/routes/posts/[slug]/*.md', { eager: true });
+	const paths = import.meta.glob('/src/posts/*.md', { eager: true });
 
-	type Post = {
-		title: string;
-		pubDate: string;
-		slug: string;
-	};
-
-	const posts: Post[] = [];
-
-	for (const path in paths) {
-		const file = paths[path];
-		const slug = path.split('/').at(-1)?.replace('.md', '');
-		if (file && typeof file === 'object' && 'metadata' in file && slug) {
-			const metadata = file.metadata as Post;
-			posts.push({
-				...metadata,
+	const posts = Object.entries(paths)
+		.map(([path, file]) => {
+			const slug = path.split('/').at(-1)?.replace('.md', '') as string;
+			const metadata = (file as any).metadata;
+			return {
+				title: metadata.title as string,
+				pubDate: new Date(metadata.pubDate),
 				slug
-			});
-		}
-	}
+			};
+		})
+		.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 
 	return {
-		posts: posts
-			.map((post) => ({
-				...post,
-				pubDate: new Date(post.pubDate)
-			}))
-			.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+		posts
 	};
 }

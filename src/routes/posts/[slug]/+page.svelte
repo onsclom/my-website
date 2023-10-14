@@ -8,6 +8,14 @@
 	<title>{title}</title>
 </svelte:head>
 
+<nav class="pb-5">
+	<a
+		href="/"
+		class="text-xl font-bold no-underline hover:underline text-slate-700 dark:text-slate-300"
+		>onsclom.net</a
+	>
+</nav>
+
 <h1 style="view-transition-name: {$page.params.slug}">
 	{title}
 </h1>
