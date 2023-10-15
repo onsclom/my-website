@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import './syntax.css';
 	export let data: any;
 	const title = data.post.metadata.title;
 </script>
@@ -11,7 +12,7 @@
 <nav class="pb-5">
 	<a
 		href="/"
-		class="text-xl font-bold no-underline hover:underline text-slate-700 dark:text-slate-300"
+		class="text-xl font-bold text-slate-700 no-underline hover:underline dark:text-slate-300"
 		>onsclom.net</a
 	>
 </nav>

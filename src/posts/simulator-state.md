@@ -6,7 +6,7 @@ pubDate: 2023-03-27
 The bouncing DVD logo is a fun and easy coding project. Watching Daniel Shiffman code it in p5.js is
 one of my earliest programming memories. However, the naive solution is far from optimal.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0j86zuqqTlQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/0j86zuqqTlQ' frameborder='0' allowfullscreen></iframe></div>
 
 If you haven't already made this DVD bouncing logo, give a try! Really, take a break from reading
 and come back. We are going to go over the naive implementation, and I don't want to spoil it.

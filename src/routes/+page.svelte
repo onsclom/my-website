@@ -48,7 +48,7 @@
 </svelte:head>
 
 <hgroup>
-	<h1 class="mb-6">Hi, I'm Austin Merrick</h1>
+	<h1 class="mb-6">Hi, I'm <span class="whitespace-nowrap">Austin Merrick</span></h1>
 	<!-- TODO: make this a typewriter effect that goes through a list! -->
 	<h2 class="mt-3 text-slate-700 dark:text-slate-300">I enjoy making things</h2>
 </hgroup>
