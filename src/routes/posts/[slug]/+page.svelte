@@ -13,7 +13,7 @@
 	<a
 		href="/"
 		class="text-xl font-bold text-slate-700 no-underline hover:underline dark:text-slate-300"
-		>onsclom.net</a
+		>← onsclom.net</a
 	>
 </nav>
 
