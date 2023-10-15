@@ -14,7 +14,7 @@ exciting battle of system languages?! We will actually focus on something else h
 Node and Deno are built on V8, while Bun is built on JavaScriptCore. You might know V8 as the
 JavaScript engine of Chrome. JavaScriptCore is the engine for Safari. They have lots of interesting
 differences, but we will be focusing on a niche optimization which JavaScriptCore implements and V8
-does not: **Tail Call Optimzation**.
+does not: **Tail Call Optimization**.
 
 Let's dive in by writing some real code! Imagine you need to implement the following function:
 
