@@ -1,0 +1,91 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>onsclom</title>
+    <style is:global>
+      * {
+        --main-color: hsl(209, 85%, 34%);
+        --main-hue: 209;
+        --main-saturation: 85%;
+        --main-lightness: 34%;
+
+        --background-color: white;
+        --text-color: hsl(
+          var(--main-hue),
+          var(--main-saturation),
+          calc(var(--main-lightness) - 25%)
+        );
+        )
+      }
+
+      html {
+        border-top: 4px solid var(--main-color);
+      }
+
+      body {
+        font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans",
+          source-sans-pro, sans-serif;
+        max-width: 60ch;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        line-height: 1.5;
+        background-color: var(--background-color);
+        color: var(--text-color);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        * {
+          --background-color: hsl(
+            var(--main-hue),
+            var(--main-saturation),
+            calc(var(--main-lightness) - 25%)
+          );
+          --main-color: hsl(
+            var(--main-hue),
+            var(--main-saturation),
+            calc(var(--main-lightness) + 25%)
+          );
+
+          --text-color: hsl(
+            var(--main-hue),
+            var(--main-saturation),
+            calc(var(--main-lightness) + 65%)
+          );
+
+        }
+      }
+
+      a {
+        color: var(--main-color);
+      }
+
+      h2 {
+      }
+
+      h1 {
+      }
+
+      nav {
+        display: flex;
+        gap: 1rem;
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">onsclom.net</a>
+    </nav>
+    <slot/>
+  </body>
+</html>

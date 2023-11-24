@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "../Layout.astro"
+
+const posts = await getCollection("posts")
+---
+
+<Layout>
+  <h2>Posts</h2>
+  <ul>
+    <table>
+      <td>
+        <tr>
+          {
+            posts
+              .sort(
+                (a, b) =>
+                  new Date(b.data.pubDate).getTime() -
+                  new Date(a.data.pubDate).getTime()
+              )
+              .map((post) => (
+                <li>
+                  <span>
+                    {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                  {" - "}
+                  <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+                </li>
+              ))
+          }
+        </tr>
+      </td>
+    </table>
+  </ul>
+</Layout>
