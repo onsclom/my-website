@@ -33,7 +33,6 @@ const posts = await getCollection("posts");
             <a href={`/posts/${post.slug}`}>{post.data.title}</a>
           </p>
         ))
-        .slice(0, 3)
     }
   </main>
 </Layout>
