@@ -7,10 +7,9 @@ I wanted to recreate this:
 
 <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/nsBi8D5e188' frameborder='0' allowfullscreen></iframe></div>
 
-Here's the [resulting code](https://github.com/onsclom/apple-carousel-remake)
-and a [live preview](https://apple-carousel-remake.vercel.app/) (best used on
-desktop). Using Svelte and Tailwind, the recreation experience was suprisingly
-easy and fun.
+Here's the [resulting code](https://github.com/onsclom/apple-carousel-remake) and a
+[live preview](https://apple-carousel-remake.vercel.app/) (best used on desktop). Using Svelte and
+Tailwind, the recreation experience was suprisingly easy and fun.
 
 It's not perfect:
 
@@ -20,8 +19,7 @@ It's not perfect:
 
 Though there are things it does better than Apple's:
 
-- The animation does not lock out user input (so you can click the arrow twice
-  quickly)
+- The animation does not lock out user input (so you can click the arrow twice quickly)
 - It wraps
 - The dots at the bottom have bigger hitboxes
 

@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content"
+import { z, defineCollection } from "astro:content";
 
 export const collections = {
   posts: defineCollection({
@@ -8,4 +8,4 @@ export const collections = {
       pubDate: z.date(),
     }),
   }),
-}
+};
