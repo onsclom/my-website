@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%8C%90</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>onsclom</title>
+    <style is:global is:inline>
+      html {
+        width: 100%;
+        margin: 0;
+        background-color: hwb(212 10% 76%);
+        color: rgb(200, 215, 234);
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+        border-top: 2px solid rgb(129, 229, 236);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2 {
+        color: white;
+      }
+
+      body {
+        margin: 0 auto;
+        padding: 0 1rem;
+        /* max-width: 50ch; */
+        padding-top: 1rem;
+      }
+
+      a {
+        color: rgb(129, 229, 236);
+      }
+
+      .date {
+        font-weight: 300;
+      }
+
+      .social-media {
+        display: flex;
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">onsclom.net</a>
+    </nav>
+    <slot />
+  </body>
+</html>

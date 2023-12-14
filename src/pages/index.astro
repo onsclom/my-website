@@ -1,0 +1,127 @@
+---
+import Layout from "../Layout.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+
+const socialMedia = [
+  {
+    name: "X",
+    url: "https://twitter.com/onsclom",
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@AustinMerrick",
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com/onsclom",
+  },
+  {
+    name: "Chess",
+    url: "https://www.chess.com/member/onsclom",
+  },
+];
+---
+
+<Layout>
+  <style is:global is:inline>
+    main {
+      display: flex;
+      flex-direction: column;
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    main > div {
+      max-width: 50ch;
+    }
+
+    @media (min-width: 120ch) {
+      main {
+        flex-direction: row;
+        max-width: 100%;
+        justify-content: center;
+        align-items: start;
+        gap: 2rem;
+      }
+    }
+  </style>
+
+  <main>
+    <div>
+      <h1>
+        👋 Hi, I'm <span style="white-space: nowrap">Austin Merrick</span>
+      </h1>
+
+      <p>Welcome to my home on the internet!</p>
+
+      <p class="social-media">
+        {socialMedia.map((item) => <a href={item.url}>{item.name}</a>)}
+      </p>
+
+      <h2>👨 About me</h2>
+
+      <p>
+        I enjoy programming and making things. Sometimes I just want to program
+        for the sake of programming, so I build useless stuff like <a
+          href="https://github.com/onsclom/ts-json-parser"
+          >this TypeScript JSON parser</a
+        >. Other times I just want to make something useful, so I build stuff
+        like
+        <a href="https://bill-splitter.onsclom.net">
+          this tool for splitting bills with friends</a
+        >.
+      </p>
+    </div>
+
+    <div>
+      <h2>🛠️ Projects</h2>
+
+      <p>
+        <a href="https://cegexe.itch.io/holymatrixmony">🧩 Holy Matri(x)mony</a>
+        <i> Finalist in GMTK 2021</i>
+      </p>
+
+      <p>
+        <a href="https://canvas-text-editor.vercel.app"
+          >📝 Animated Text Editor</a
+        >
+        <i> Animation experiment</i>
+      </p>
+
+      <p>
+        <a href="/projects">See more</a>
+      </p>
+
+      <h2>✍️ Writing</h2>
+
+      {
+        posts
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).getTime() -
+              new Date(a.data.pubDate).getTime()
+          )
+          .map((post) => (
+            <p>
+              <span class="date">
+                {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+              <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+            </p>
+          ))
+          .slice(0, 3)
+      }
+
+      <p>
+        <a href="/posts">See more</a>
+      </p>
+    </div>
+  </main>
+</Layout>
