@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>onsclom</title>
-    <style is:global is:inline>
+    <style is:global>
       html {
         width: 100%;
         margin: 0;
@@ -31,7 +31,6 @@
       body {
         margin: 0 auto;
         padding: 0 1rem;
-        /* max-width: 50ch; */
         padding-top: 1rem;
       }
 
@@ -39,13 +38,9 @@
         color: rgb(129, 229, 236);
       }
 
-      .date {
-        font-weight: 300;
-      }
-
-      .social-media {
-        display: flex;
-        gap: 1rem;
+      main {
+        max-width: 50ch;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -53,6 +48,8 @@
     <nav>
       <a href="/">onsclom.net</a>
     </nav>
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>

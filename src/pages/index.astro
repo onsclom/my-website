@@ -45,9 +45,13 @@ const projects = [
 
 <Layout>
   <style is:global is:inline>
-    main {
-      max-width: 50ch;
-      margin: 0 auto;
+    .date {
+      font-weight: 300;
+    }
+
+    .social-media {
+      display: flex;
+      gap: 1rem;
     }
   </style>
 
@@ -57,7 +61,6 @@ const projects = [
     </h1>
 
     <p>Welcome to my home on the internet!</p>
-
     <p class="social-media">
       {socialMedia.map((item) => <a href={item.url}>{item.name}</a>)}
     </p>

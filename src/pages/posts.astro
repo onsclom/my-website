@@ -4,13 +4,6 @@ import { getCollection } from "astro:content";
 const posts = await getCollection("posts");
 ---
 
-<style>
-  main {
-    max-width: 50ch;
-    margin: 0 auto;
-  }
-</style>
-
 <Layout>
   <main>
     <h1>Posts</h1>
