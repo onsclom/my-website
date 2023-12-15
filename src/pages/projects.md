@@ -12,17 +12,16 @@ layout: "../Layout.astro"
 
 [Perwinkle Blues](https://cegexe.itch.io/periwinkle-blues) Mouse-only platformer
 
-[Wrushle](https://wordle-rush.vercel.app/) Worlde & Puzzle Rush combo
+[Wrushle](https://wordle-rush.vercel.app/) Worlde and puzzle rush mix
 
 [A Long Night](https://austinmerrick.itch.io/a-long-night) Procedurally
-Generated FPS
+generated FPS
 
-[Fencing Game](https://onsclom.github.io/fencing-game/) 2-player fightin game
+[Fencing Game](https://onsclom.github.io/fencing-game/) 2-player fighting game
 
 [Hone](https://hone.onsclom.net/) Minimalist fencing game
 
-[HTML5 Snake](https://onsclom.github.io/html5-snake/) Simple snake
-implementation
+[HTML5 Snake](https://onsclom.github.io/html5-snake/) Simple browser snake
 
 ## Websites
 
