@@ -23,6 +23,24 @@ const socialMedia = [
     url: "https://www.chess.com/member/onsclom",
   },
 ];
+
+const projects = [
+  {
+    name: "🧩 Holy Matri(x)mony",
+    url: "https://cegexe.itch.io/holymatrixmony",
+    description: "Finalist in GMTK 2021",
+  },
+  {
+    name: "📝 Animated Text Editor",
+    url: "https://canvas-text-editor.vercel.app",
+    description: "Animation experiment",
+  },
+  {
+    name: "⭕️ Circle Clock",
+    url: "https://circle-clock.vercel.app/",
+    description: "Minimalist browser game",
+  },
+];
 ---
 
 <Layout>
@@ -52,6 +70,7 @@ const socialMedia = [
         >this TypeScript JSON parser</a
       >. Other times I just want to make something useful, so I build stuff like
 
+
       <a href="https://bill-splitter.onsclom.net">
         this tool for splitting bills with friends</a
       >.
@@ -59,16 +78,13 @@ const socialMedia = [
 
     <h2>🛠️ Projects</h2>
 
-    <p>
-      <a href="https://cegexe.itch.io/holymatrixmony">🧩 Holy Matri(x)mony</a>
-      <i> Finalist in GMTK 2021</i>
-    </p>
-
-    <p>
-      <a href="https://canvas-text-editor.vercel.app">📝 Animated Text Editor</a
-      >
-      <i> Animation experiment</i>
-    </p>
+    {
+      projects.map((project) => (
+        <p>
+          <a href={project.url}>{project.name}</a> {project.description}
+        </p>
+      ))
+    }
 
     <p>
       <a href="/projects">See more</a>
