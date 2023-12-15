@@ -40,6 +40,8 @@ implementation
 
 [Reamyf](https://onsclom.github.io/reamyf/) Assembly-like programming language
 
+[Animated Text Editor](https://canvas-text-editor.vercel.app) Smooth text editor
+
 ## Tools
 
 [Fun Timer](https://fun-timer.vercel.app/) Animated timer
