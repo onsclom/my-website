@@ -5,7 +5,7 @@ pubDate: 2023-09-09
 
 [Bun](https://bun.sh/) is a JavaScript runtime that just released version 1.0! Now you have three
 choices for running JavaScript outside of the browser: Node, Deno, and Bun. One of Bun's selling
-points is speed! It makes some interesting decisions to acheive this.
+points is speed! It makes some interesting decisions to achieve this.
 
 For one, Bun is programmed using [Zig](https://ziglang.org/). This results in an exciting universe:
 Node is made with **C++**, Deno is made with **Rust**, and Bun is made with **Zig**. Isn't this an
@@ -58,7 +58,7 @@ stack size for your program, but there is only so much the OS will allow. Memory
 less restricted. How can we use recursion without fear of exceeding the call stack? The answer: hope
 your JavaScript engine implements TCO and write your recursion in a way that can be optimized!
 
-The process of rewriting a function to be tail call optmized generally involves moving state to
+The process of rewriting a function to be tail call optimized generally involves moving state to
 arguments. The recursive call needs to be the last thing in the function's AST. The TCO version of
 our recursive function looks like:
 
@@ -67,7 +67,7 @@ const count = (amount: number, cur: number[] = []) =>
 	cur.length >= amount ? cur : count(amount, [...cur, cur.length + 1]);
 ```
 
-Its slightly less succint and elegant, but it can be tail call optimized now! If we run
+Its slightly less succinct and elegant, but it can be tail call optimized now! If we run
 `count(100000)` with Deno, we still get
 `error: Uncaught RangeError: Maximum call stack size exceeded`. With Bun, the program now
 successfully runs! But there's still one more problem... This solution is really slow.
@@ -84,7 +84,7 @@ function count(amount: number, cur: number[] = []) {
 }
 ```
 
-This function is starting to look a lot like the orignal for loop solution. It's not very succinct
+This function is starting to look a lot like the original for loop solution. It's not very succinct
 or elegant anymore. But, it runs `count(100000)` at `.01s` as well. Nice!
 
 The minimalist part of me really enjoys TCO. It enables a language to express complex and efficient

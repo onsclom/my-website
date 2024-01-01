@@ -8,7 +8,7 @@ hard. Why is this? Games give **immediate feedback**. Game developers add
 [game juice](https://garden.bradwoods.io/notes/design/juice) to maximize feedback per input. If you
 aren’t careful, programming becomes the opposite. I’ll start with an example of a bad feedback loop.
 
-My first programming course in university taught us C++. For coding assigments we were instructed
+My first programming course in university taught us C++. For coding assignments we were instructed
 to: `ssh` into university server, `nano main.cpp`, edit our code (without any syntax highlighting or
 linting), save, exit nano, `g++ main.cpp`, then `./a.out`. Needless to say, we all **hated** doing
 our assignments. Was it good to learn basic unix commands? Sure. Could there have been a better
@@ -20,7 +20,7 @@ nano made things worse. Everything we knew about GUI text editors went out the w
 totally ruined the feedback loop. I believe we could have learned faster and more importantly,
 enjoyed programming, if we used a process that promoted immediate feedback.
 
-19 year old me would be very suprised to hear that I actually enjoy programming now. I do things
+19 year old me would be very surprised to hear that I actually enjoy programming now. I do things
 like [Advent of Code](https://adventofcode.com/), coding puzzles much like my school assignments,
 for fun! Also, I make projects not just for the final product, but because I enjoy the process! I
 believe immediate feedback is the main factor that caused this change. The following are different

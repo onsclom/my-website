@@ -9,7 +9,7 @@ I wanted to recreate this:
 
 Here's the [resulting code](https://github.com/onsclom/apple-carousel-remake) and a
 [live preview](https://apple-carousel-remake.vercel.app/) (best used on desktop). Using Svelte and
-Tailwind, the recreation experience was suprisingly easy and fun.
+Tailwind, the recreation experience was surprisingly easy and fun.
 
 It's not perfect:
 

@@ -14,7 +14,7 @@ things. Great documentation is **official**, **interactive**, and **open-source*
 The people who make a tool should officially endorse great documentation. Or even better, they
 should work closely with the documentation writers. Or best case scenario, the people who make the
 tool also write documentation! Good documentation should show exactly how a tool was made to be
-used. The official webpage of the tool should spark curiousity. The official webpage should make it
+used. The official webpage of the tool should spark curiosity. The official webpage should make it
 easy to start learning.
 
 ## Interactive

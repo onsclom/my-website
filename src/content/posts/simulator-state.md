@@ -95,7 +95,7 @@ function update(time: number) {
 })();
 ```
 
-We converted our previous `Simulation` into an `Animation`. Instead of maintaing state, we calculate
+We converted our previous `Simulation` into an `Animation`. Instead of maintaining state, we calculate
 positions using just `time`. Not only did we make the code simpler, but we also made the code
 function better!
 
