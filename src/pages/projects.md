@@ -2,9 +2,9 @@
 layout: "../Layout.astro"
 ---
 
-# Projects
+# 🛠️ Projects
 
-## Games
+## 🎮 Games
 
 [Holy Matri(x)mony](https://cegexe.itch.io/holymatrixmony) Puzzle game
 
@@ -23,13 +23,13 @@ generated FPS
 
 [HTML5 Snake](https://onsclom.github.io/html5-snake/) Simple browser snake
 
-## Websites
+## 🌐 Websites
 
 [onsclom.net](/) This website
 
 [H2O Power Pro](https://github.com/onsclom/h2o-power-pro) Power washing
 
-## Experiments
+## 🧪 Experiments
 
 [2D Physics Simulation](https://ts-physics.vercel.app/) TypeScript physics
 
@@ -41,7 +41,7 @@ generated FPS
 
 [Animated Text Editor](https://canvas-text-editor.vercel.app) Smooth text editor
 
-## Tools
+## 🧰 Tools
 
 [Fun Timer](https://fun-timer.vercel.app/) Animated timer
 
