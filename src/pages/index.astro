@@ -50,8 +50,9 @@ const projects = [
     }
 
     .social-media {
-      display: flex;
-      gap: 1rem;
+      a + a {
+        margin-left: 0.5rem;
+      }
     }
   </style>
 
@@ -59,11 +60,11 @@ const projects = [
     <h1>
       👋 Hi, I'm <span style="white-space: nowrap">Austin Merrick</span>
     </h1>
-
-    <p>Welcome to my home on the internet!</p>
     <p class="social-media">
       {socialMedia.map((item) => <a href={item.url}>{item.name}</a>)}
     </p>
+
+    <p>Welcome to my 🏠 on the internet!</p>
 
     <h2>👨 About me</h2>
     <p>
