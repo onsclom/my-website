@@ -23,6 +23,8 @@ generated FPS
 
 [HTML5 Snake](https://onsclom.github.io/html5-snake/) Simple browser snake
 
+[Typing game](https://typing-test.onsclom.net/) Flashy typing test
+
 ## 🌐 Websites
 
 [onsclom.net](/) This website
