@@ -1,3 +1,4 @@
+import type { SHA512_256 } from "bun";
 import { lerp } from "./lerp";
 
 const eventLife = 1000;
@@ -72,20 +73,23 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
 
   ctx.fillStyle = "#fefefe";
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  ctx.fillStyle = "#eaeaea";
-  ctx.strokeStyle = "#eaeaea";
+  ctx.fillStyle = "#f8f8f8";
+  ctx.strokeStyle = "#ddd";
+
+  // ctx.globalCompositeOperation = "lighter";
 
   // using dt
   opacity = lerp(opacity, targetOpacity, 1 - Math.exp(-0.0005 * dt));
   ctx.globalAlpha = opacity;
 
-  const gridSize = 40;
+  const gridSize = 30;
 
   // draw text grid
   const canvasRect = ctx.canvas.getBoundingClientRect();
   const cols = Math.ceil(canvasRect.width / gridSize);
   const rows = Math.ceil(canvasRect.height / gridSize);
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
+
   for (let col = 0; col < cols; col++) {
     for (let row = 0; row < rows; row++) {
       const x = col * gridSize + gridSize / 2;
@@ -126,6 +130,12 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
         y - +Math.sin(offset + performance.now() * 0.001) * 5 + pointerOffsetY,
       );
       ctx.rotate((offset + performance.now() * 0.005) * 0.2);
+      ctx.fillRect(
+        -(gridSize / 2) * rad,
+        -(gridSize / 2) * rad,
+        (gridSize / 2) * rad * 2,
+        (gridSize / 2) * rad * 2,
+      );
       ctx.strokeRect(
         -(gridSize / 2) * rad,
         -(gridSize / 2) * rad,
@@ -135,4 +145,30 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
       ctx.restore();
     }
   }
+
+  ctx.globalAlpha = 0.1;
+  // gradiant
+  const rect = ctx.canvas.getBoundingClientRect();
+  const gradient = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+
+  // const sat = 100;
+  // const light = 50;
+  // // sunset colors
+  // gradient.addColorStop(0, `hsl(30, ${sat}%, ${light}%)`);
+  // gradient.addColorStop(0.2, `hsl(60, ${sat}%, ${light}%)`);
+  // gradient.addColorStop(0.4, `hsl(120, ${sat}%, ${light}%)`);
+  // gradient.addColorStop(0.6, `hsl(180, ${sat}%, ${light}%)`);
+  // gradient.addColorStop(0.8, `hsl(240, ${sat}%, ${light}%)`);
+  // gradient.addColorStop(1, `hsl(300, ${sat}%, ${light}%)`);
+  // ctx.fillStyle = gradient;
+  // ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  // ctx.globalAlpha = 1;
+
+  // apply blur filter before drawing
+  // ctx.save();
+  // ctx.filter = "blur(2px)";
+  // ctx.scale(1 / devicePixelRatio, 1 / devicePixelRatio);
+  // ctx.drawImage(ctx.canvas, 0, 0);
+  // reset filter so future draws aren't blurred
+  // ctx.restore();
 }
