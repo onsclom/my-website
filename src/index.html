@@ -8,7 +8,7 @@
         <style>
             :root {
                 --color-text: #111;
-                --color-bg: #fefefe;
+                --color-bg: rgba(254, 254, 254, 0.5);
                 --color-selection-bg: #111;
                 --color-selection-text: #fefefe;
             }
@@ -16,7 +16,7 @@
             @media (prefers-color-scheme: dark) {
                 :root {
                     --color-text: #eee;
-                    --color-bg: #111;
+                    --color-bg: rgba(17, 17, 17, 0.5);
                     --color-selection-bg: #eee;
                     --color-selection-text: #111;
                 }
@@ -73,20 +73,16 @@
                 }
             }
 
-            /* background layer: on wrapper divs, between canvas and text */
-            body > div:not(:empty),
-            body > ul > div {
-                width: fit-content;
-                background-color: var(--color-bg);
-                padding: 0.25lh 1rem;
-                backdrop-filter: blur(10px);
-            }
-
             h1,
             h2,
             p,
-            li {
-                display: inline;
+            li,
+            .links {
+                display: block;
+                width: fit-content;
+                background-color: var(--color-bg);
+                padding: 0.25lh 1rem;
+                backdrop-filter: blur(2px);
             }
 
             h1::before {
@@ -105,84 +101,66 @@
             ul li::before {
                 content: "- ";
             }
+
+            .spacer {
+                height: 1lh;
+            }
         </style>
     </head>
     <body>
-        <div><h1>onsclom</h1></div>
+        <h1>onsclom</h1>
+        <p>hi, i'm austin merrick 👋</p>
+        <p>welcome to my home on the internet 🏠</p>
 
-        <div>
-            <p>hi, i'm austin merrick 👋</p>
-        </div>
+        <div class="spacer"></div>
 
-        <div>
-            <p>welcome to my home on the internet 🏠</p>
-        </div>
-
-        <div style="height: 1lh"></div>
-
-        <div><h2>about</h2></div>
+        <h2>about</h2>
         <ul>
-            <div><li>i like programming and making things</li></div>
-            <div>
-                <li>
-                    soon, recurser @
-                    <a href="https://www.recurse.com/">recurse center</a>
-                </li>
-            </div>
-            <div>
-                <li>
-                    previously, software engineer @
-                    <a href="https://vercel.com/">vercel</a>
-                </li>
-            </div>
-            <div>
-                <li><span id="age-span">27</span> rotations around the sun</li>
-            </div>
-            <div><li>located in las vegas, nevada</li></div>
+            <li>i like programming and making things</li>
+            <li>
+                soon, recurser @
+                <a href="https://www.recurse.com/">recurse center</a>
+            </li>
+            <li>
+                previously, software engineer @
+                <a href="https://vercel.com/">vercel</a>
+            </li>
+            <li><span id="age-span">7</span> rotations around the sun</li>
+            <li>located in las vegas, nevada</li>
         </ul>
 
-        <div style="height: 1lh"></div>
+        <div class="spacer"></div>
 
-        <div><h2>projects</h2></div>
+        <h2>projects</h2>
         <ul>
-            <div>
-                <li>
-                    <a href="https://ted.onsclom.net/">ted</a>: animated text
-                    editor
-                </li>
-            </div>
-            <div>
-                <li>
-                    <a href="https://melody-metronome.vercel.app/"
-                        >melody metronome</a
-                    >: ear trainer
-                </li>
-            </div>
-            <div>
-                <li>
-                    <a href="https://time-and-tap.vercel.app/">time and tap</a>:
-                    1 button game
-                </li>
-            </div>
-            <div>
-                <li>
-                    <a href="https://async-chess.vercel.app/">async chess</a>:
-                    no turn chess
-                </li>
-            </div>
-            <div>
-                <li>
-                    <a href="https://platformator.vercel.app/">platformator</a>:
-                    2d platformer
-                </li>
-            </div>
+            <li>
+                <a href="https://ted.onsclom.net/">ted</a>: animated text editor
+            </li>
+            <li>
+                <a href="https://melody-metronome.vercel.app/"
+                    >melody metronome</a
+                >: ear trainer
+            </li>
+            <li>
+                <a href="https://time-and-tap.vercel.app/">time and tap</a>: 1
+                button game
+            </li>
+            <li>
+                <a href="https://async-chess.vercel.app/">async chess</a>: no
+                turn chess
+            </li>
+            <li>
+                <a href="https://platformator.vercel.app/">platformator</a>: 2d
+                platformer
+            </li>
         </ul>
 
-        <div style="height: 1lh"></div>
-        <div>
+        <div class="spacer"></div>
+
+        <p class="links">
             <a href="https://github.com/onsclom">github</a>
             <a href="https://www.youtube.com/@AustinMerrick">youtube</a>
             <a href="https://www.onsclom.net/posts">writing</a>
-        </div>
+        </p>
     </body>
 </html>
