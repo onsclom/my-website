@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/writing",
-      "destination": "https://onsclom-old.vercel.app/writing"
+      "destination": "https://old.onsclom.net/writing"
     },
     {
       "source": "/writing/:path*",
-      "destination": "https://onsclom-old.vercel.app/writing/:path*"
+      "destination": "https://old.onsclom.net/writing/:path*"
     }
   ]
 }
