@@ -81,10 +81,14 @@ document.body.onpointerdown = (e) => {
   }
 };
 
-let opacity = 0;
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+let opacity = prefersReducedMotion ? 1 : 0;
 const targetOpacity = 1;
 const springK = 40;
-const dampC = 5;
+const dampC = 7;
 
 export function tick(ctx: CanvasRenderingContext2D, dt: number) {
   const ageSpan = document.getElementById("age-span")!;
@@ -126,10 +130,11 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
     sq.offsetY += sq.velY * dtS;
   }
 
-  ctx.fillStyle = "#fefefe";
+  const dark = darkModeQuery.matches;
+  ctx.fillStyle = dark ? "#111" : "#fefefe";
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  ctx.fillStyle = "#f8f8f8";
-  ctx.strokeStyle = "#ddd";
+  ctx.fillStyle = dark ? "#1a1a1a" : "#f8f8f8";
+  ctx.strokeStyle = dark ? "#2a2a2a" : "#ddd";
 
   opacity = lerp(opacity, targetOpacity, 1 - Math.exp(-0.005 * dt));
   ctx.globalAlpha = opacity;

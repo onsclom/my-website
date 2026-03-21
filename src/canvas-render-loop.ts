@@ -8,6 +8,16 @@ export function startLoop(
   canvas: HTMLCanvasElement,
   tick: (ctx: CanvasRenderingContext2D, dt: number) => void,
 ) {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (prefersReducedMotion) {
+    runTickStep(canvas, tick);
+    window.addEventListener("resize", () => runTickStep(canvas, tick));
+    return;
+  }
+
   if (FIXED_FPS) {
     setInterval(() => {
       runTickStep(canvas, tick);

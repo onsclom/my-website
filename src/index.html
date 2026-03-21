@@ -6,24 +6,40 @@
         <title>onsclom</title>
         <script type="module" src="./index.ts"></script>
         <style>
+            :root {
+                --color-text: #111;
+                --color-bg: #fefefe;
+                --color-selection-bg: #111;
+                --color-selection-text: #fefefe;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --color-text: #eee;
+                    --color-bg: #111;
+                    --color-selection-bg: #eee;
+                    --color-selection-text: #111;
+                }
+            }
+
             * {
                 margin: 0;
                 line-height: 1;
                 font-family:
                     ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
                     Consolas, "DejaVu Sans Mono", monospace;
-                color: #111;
+                color: var(--color-text);
                 font-size: 1rem;
 
                 /*make highlighting black and white*/
-                -webkit-text-fill-color: #111;
+                -webkit-text-fill-color: var(--color-text);
                 -webkit-text-stroke-width: 0.003em;
-                -webkit-text-stroke-color: #111;
+                -webkit-text-stroke-color: var(--color-text);
             }
 
             * ::selection {
-                background: #111;
-                color: #fefefe;
+                background: var(--color-selection-bg);
+                color: var(--color-selection-text);
             }
 
             canvas {
@@ -39,7 +55,7 @@
             body {
                 margin-left: 2ch;
                 margin-top: 1lh;
-                color: #333;
+                color: var(--color-text);
                 flex-direction: column;
                 position: relative;
                 z-index: 3;
@@ -61,7 +77,7 @@
             body > div:not(:empty),
             body > ul > div {
                 width: fit-content;
-                background-color: #fefefe;
+                background-color: var(--color-bg);
                 padding: 0.25lh 1rem;
                 backdrop-filter: blur(10px);
             }
@@ -83,6 +99,7 @@
             ul {
                 list-style: none;
                 padding-left: 1ch;
+                width: fit-content;
             }
 
             ul li::before {
