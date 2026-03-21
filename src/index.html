@@ -1,132 +1,171 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>onsclom</title>
-    <script type="module" src="./index.ts"></script>
-    <style>
-      * {
-        margin: 0;
-        line-height: 1.5;
-        font-family:
-          ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-          "DejaVu Sans Mono", monospace;
-        color: #111;
-        font-size: 1rem;
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>onsclom</title>
+        <script type="module" src="./index.ts"></script>
+        <style>
+            * {
+                margin: 0;
+                line-height: 1;
+                font-family:
+                    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+                    Consolas, "DejaVu Sans Mono", monospace;
+                color: #111;
+                font-size: 1rem;
 
-        /*make highlighting black and white*/
-        -webkit-text-fill-color: #111;
-        -webkit-text-stroke-width: 0.003em;
-        -webkit-text-stroke-color: #111;
-      }
+                /*make highlighting black and white*/
+                -webkit-text-fill-color: #111;
+                -webkit-text-stroke-width: 0.003em;
+                -webkit-text-stroke-color: #111;
+            }
 
-      * ::selection {
-        background: #111;
-        color: #fefefe;
-      }
+            * ::selection {
+                background: #111;
+                color: #fefefe;
+            }
 
-      canvas {
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 2;
-        cursor: pointer
-      }
+            canvas {
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                cursor: pointer;
+            }
 
-      body {
-        margin-left: 2ch;
-        margin-top: 1lh;
-        color: #333;
-        flex-direction: column;
-      }
+            body {
+                margin-left: 2ch;
+                margin-top: 1lh;
+                color: #333;
+                flex-direction: column;
+                position: relative;
+                z-index: 3;
+            }
 
-      /*increase margin-left on larger screens*/
-      @media (min-width: 600px) {
-        body {
-          margin-left: 4ch;
-          margin-top: 2lh;
-        }
-      }
+            body > *:not(canvas) {
+                position: relative;
+            }
 
-      h1,
-      h2,
-      p,
-      li {
-        display: inline;
+            /*increase margin-left on larger screens*/
+            @media (min-width: 600px) {
+                body {
+                    margin-left: 4ch;
+                    margin-top: 2lh;
+                }
+            }
 
-        box-decoration-break: clone; /* important */
-        -webkit-box-decoration-break: clone;
+            /* background layer: on wrapper divs, between canvas and text */
+            body > div:not(:empty),
+            body > ul > div {
+                width: fit-content;
+                background-color: #fefefe;
+                padding: 0.25lh 1rem;
+                backdrop-filter: blur(10px);
+            }
 
-        background-color: #fefefe;
+            h1,
+            h2,
+            p,
+            li {
+                display: inline;
+            }
 
-        position: relative;
-        z-index: 10;
-        padding: .25rem;
+            h1::before {
+                content: "# ";
+            }
+            h2::before {
+                content: "## ";
+            }
 
-        backdrop-filter: blur(10px);
-      }
+            ul {
+                list-style: none;
+                padding-left: 1ch;
+            }
 
-      h1::before {
-        content: "# ";
-      }
-      h2::before {
-        content: "## ";
-      }
+            ul li::before {
+                content: "- ";
+            }
+        </style>
+    </head>
+    <body>
+        <div><h1>onsclom</h1></div>
 
-      ul {
-        list-style: none;
-        padding-left: 1ch;
-      }
+        <div>
+            <p>hi, i'm austin merrick 👋</p>
+        </div>
 
-      ul li::before {
-        content: "- ";
-      }
-    </style>
-  </head>
-  <body>
-    <h1>onsclom</h1>
+        <div>
+            <p>welcome to my home on the internet 🏠</p>
+        </div>
 
-    <div>
-      <p>hi, i'm austin merrick 👋</p>
-    </div>
+        <div style="height: 1lh"></div>
 
-    <div>
-      <p>welcome to my home on the internet 🏠</p>
-    </div>
+        <div><h2>about</h2></div>
+        <ul>
+            <div><li>i like programming and making things</li></div>
+            <div>
+                <li>
+                    soon, recurser @
+                    <a href="https://www.recurse.com/">recurse center</a>
+                </li>
+            </div>
+            <div>
+                <li>
+                    previously, software engineer @
+                    <a href="https://vercel.com/">vercel</a>
+                </li>
+            </div>
+            <div>
+                <li><span id="age-span">27</span> rotations around the sun</li>
+            </div>
+            <div><li>located in las vegas, nevada</li></div>
+        </ul>
 
-    <div style="height: 1lh"></div>
+        <div style="height: 1lh"></div>
 
-    <h2>about</h2>
-    <ul>
-      <div><li>i like programming and making things</li></div>
-      <div>
-        <li><span id="age-span">27</span> rotations around the sun</li>
-      </div>
-      <div><li>located in las vegas, nevada</li></div>
-      <div>
-        <li>soon, recurser @ <a href="https://www.recurse.com/">recurse center</a></li>
-        <li>previously, software engineer @ <a href="https://vercel.com/">vercel</a></li>
-      </div>
-    </ul>
+        <div><h2>projects</h2></div>
+        <ul>
+            <div>
+                <li>
+                    <a href="https://ted.onsclom.net/">ted</a>: animated text
+                    editor
+                </li>
+            </div>
+            <div>
+                <li>
+                    <a href="https://melody-metronome.vercel.app/"
+                        >melody metronome</a
+                    >: ear trainer
+                </li>
+            </div>
+            <div>
+                <li>
+                    <a href="https://time-and-tap.vercel.app/">time and tap</a>:
+                    1 button game
+                </li>
+            </div>
+            <div>
+                <li>
+                    <a href="https://async-chess.vercel.app/">async chess</a>:
+                    no turn chess
+                </li>
+            </div>
+            <div>
+                <li>
+                    <a href="https://platformator.vercel.app/">platformator</a>:
+                    2d platformer
+                </li>
+            </div>
+        </ul>
 
-    <div style="height: 1lh"></div>
-
-    <h2>projects</h2>
-    <ul>
-      <div><li><a href="https://ted.onsclom.net/">ted</a>: animated text editor</li></div>
-      <div><li><a href="https://melody-metronome.vercel.app/">melody metronome</a>: ear trainer</li></div>
-      <div><li><a href="https://time-and-tap.vercel.app/">time and tap</a>: 1 button game</li></div>
-      <div><li><a href="https://async-chess.vercel.app/">async chess</a>: no turn chess</li></div>
-      <div><li><a href="https://platformator.vercel.app/">platformator</a>: 2d platformer</li></div>
-    </ul>
-
-    <div style="height: 1lh"></div>
-      <a href="https://github.com/onsclom">github</a>
-      <a href="https://www.youtube.com/@AustinMerrick">youtube</a>
-      <a href="https://www.onsclom.net/posts">writing</a>
-    </div>
-  </body>
+        <div style="height: 1lh"></div>
+        <div>
+            <a href="https://github.com/onsclom">github</a>
+            <a href="https://www.youtube.com/@AustinMerrick">youtube</a>
+            <a href="https://www.onsclom.net/posts">writing</a>
+        </div>
+    </body>
 </html>
