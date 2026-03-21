@@ -30,7 +30,9 @@ function runTickStep(
   tick: (ctx: CanvasRenderingContext2D, dt: number) => void,
 ) {
   const now = performance.now();
-  const dt = now - lastTime;
+  const maxDt = 100;
+  const dt = Math.min(maxDt, now - lastTime);
+
   lastTime = now;
 
   const canvasRect = canvas.getBoundingClientRect();
