@@ -7,6 +7,10 @@
     {
       "source": "/posts/:path*",
       "destination": "https://old.onsclom.net/posts/:path*"
+    },
+    {
+      "source": "/images/:path*",
+      "destination": "https://old.onsclom.net/images/:path*"
     }
   ]
 }
