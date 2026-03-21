@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/writing",
+      "destination": "https://onsclom-old.vercel.app/writing"
+    },
+    {
+      "source": "/writing/:path*",
+      "destination": "https://onsclom-old.vercel.app/writing/:path*"
+    }
+  ]
+}
