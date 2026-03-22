@@ -45,8 +45,14 @@ function allocateSquares(width: number, height: number) {
 type PendingMove = { dx: number; dy: number; px: number; py: number };
 let pendingMove: PendingMove | null = null;
 let lastPos: { x: number; y: number } | null = null;
+let pointerDown: { x: number; y: number } | null = null;
 
 document.body.onpointermove = (e) => {
+  if (pointerDown) {
+    pointerDown.x = e.clientX;
+    pointerDown.y = e.clientY;
+  }
+
   if (lastPos) {
     const dx = e.clientX - lastPos.x;
     const dy = e.clientY - lastPos.y;
@@ -68,17 +74,26 @@ document.body.onpointermove = (e) => {
 };
 
 document.body.onpointerdown = (e) => {
+  pointerDown = { x: e.clientX, y: e.clientY };
   const px = e.clientX;
   const py = e.clientY;
   const effectDistance = 150;
   for (const sq of squares) {
     const dist = Math.hypot(sq.originX - px, sq.originY - py);
     if (dist < effectDistance) {
-      const effect = (1 - dist / effectDistance) ** 2 * 30;
-      sq.velX += (sq.originX - px) * effect;
-      sq.velY += (sq.originY - py) * effect;
+      const effect = (1 - dist / effectDistance) ** 2 * 12;
+      sq.velX += (px - sq.originX) * effect;
+      sq.velY += (py - sq.originY) * effect;
     }
   }
+};
+
+document.body.onpointerup = () => {
+  pointerDown = null;
+};
+
+document.body.onpointercancel = () => {
+  pointerDown = null;
 };
 
 const prefersReducedMotion = window.matchMedia(
@@ -106,6 +121,21 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
     lastHeight = logicalHeight;
   }
 
+  const dtS = dt / 1000;
+
+  if (pointerDown) {
+    const { x: px, y: py } = pointerDown;
+    const effectDistance = 150;
+    for (const sq of squares) {
+      const dist = Math.hypot(sq.originX - px, sq.originY - py);
+      if (dist < effectDistance) {
+        const effect = (1 - dist / effectDistance) ** 2 * 30 * dtS;
+        sq.velX += (px - sq.originX) * effect;
+        sq.velY += (py - sq.originY) * effect;
+      }
+    }
+  }
+
   if (pendingMove) {
     const { dx, dy, px, py } = pendingMove;
     pendingMove = null;
@@ -120,7 +150,6 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
     }
   }
 
-  const dtS = dt / 1000;
   for (const sq of squares) {
     const accX = -springK * sq.offsetX - dampC * sq.velX;
     const accY = -springK * sq.offsetY - dampC * sq.velY;
