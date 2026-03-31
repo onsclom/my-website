@@ -13,8 +13,6 @@ const COMPRESSOR_RELEASE = 0.25;
 
 const LPF_DEFAULT_FREQ = 1800;
 const LPF_Q = 0.9;
-const LPF_MIN_FREQ = 400;
-const LPF_MAX_MULT = 20;
 
 const DELAY_TIME = 0.15;
 const DELAY_FEEDBACK = 0.2;
@@ -29,6 +27,8 @@ const VIBRATO_DEPTH = 5;
 
 const CHORUS_DETUNE_MIN = 0.2;
 const CHORUS_DETUNE_MAX = 5.0;
+
+const PITCH_RANGE_CENTS = 1200; // one octave total range (±600 cents from center)
 
 const POINTER_SMOOTHING = 0.08;
 
@@ -65,6 +65,7 @@ interface DroneState {
   sources: AudioScheduledSourceNode[];
   lpf: BiquadFilterNode;
   detuneableOscs: Array<{ osc: OscillatorNode; baseDetune: number }>;
+  allOscs: OscillatorNode[];
 }
 
 let droneState: DroneState | null = null;
@@ -140,6 +141,7 @@ export function startDrone(): void {
   sources.push(vLFO);
 
   const detuneableOscs: DroneState["detuneableOscs"] = [];
+  const allOscs: OscillatorNode[] = [];
 
   VOICES.forEach((def) => {
     const osc = ctx.createOscillator();
@@ -152,11 +154,12 @@ export function startDrone(): void {
     g.connect(comp);
     if (def.vibrato) vLFOGain.connect(osc.detune);
     if (def.det !== 0) detuneableOscs.push({ osc, baseDetune: def.det });
+    allOscs.push(osc);
     osc.start(t);
     sources.push(osc);
   });
 
-  droneState = { masterGain, sources, lpf, detuneableOscs };
+  droneState = { masterGain, sources, lpf, detuneableOscs, allOscs };
 }
 
 export function stopDrone(): void {
@@ -192,12 +195,20 @@ export function setDronePointer(x: number, y: number): void {
   const nx = Math.max(0, Math.min(1, x / window.innerWidth));
   const ny = Math.max(0, Math.min(1, y / window.innerHeight));
 
-  const targetFreq = LPF_MIN_FREQ * Math.pow(LPF_MAX_MULT, nx);
-  droneState.lpf.frequency.setTargetAtTime(targetFreq, t, POINTER_SMOOTHING);
+  // X-axis: pitch-shift all voices across one octave (left = -600¢, center = 0, right = +600¢)
+  const pitchOffset = (nx - 0.5) * PITCH_RANGE_CENTS;
+  for (const osc of droneState.allOscs) {
+    osc.detune.setTargetAtTime(pitchOffset, t, POINTER_SMOOTHING);
+  }
 
+  // Y-axis: chorus detune (applied additively on top of pitch offset)
   const detuneScale =
     CHORUS_DETUNE_MIN + ny * (CHORUS_DETUNE_MAX - CHORUS_DETUNE_MIN);
   for (const { osc, baseDetune } of droneState.detuneableOscs) {
-    osc.detune.setTargetAtTime(baseDetune * detuneScale, t, POINTER_SMOOTHING);
+    osc.detune.setTargetAtTime(
+      pitchOffset + baseDetune * detuneScale,
+      t,
+      POINTER_SMOOTHING,
+    );
   }
 }
