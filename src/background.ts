@@ -1,4 +1,5 @@
 import { lerp } from "./lerp";
+import { startDrone, stopDrone, setDronePointer } from "./drone";
 import { sinLUT, SIN_LUT_MASK, SIN_LUT_QUARTER, radToIndex } from "./sinLUT";
 
 const gridSize = 30;
@@ -51,6 +52,7 @@ document.body.onpointermove = (e) => {
   if (pointerDown) {
     pointerDown.x = e.clientX;
     pointerDown.y = e.clientY;
+    setDronePointer(e.clientX, e.clientY);
   }
 
   if (lastPos) {
@@ -74,6 +76,8 @@ document.body.onpointermove = (e) => {
 };
 
 document.body.onpointerdown = (e) => {
+  startDrone();
+  setDronePointer(e.clientX, e.clientY);
   pointerDown = { x: e.clientX, y: e.clientY };
   const px = e.clientX;
   const py = e.clientY;
@@ -89,10 +93,12 @@ document.body.onpointerdown = (e) => {
 };
 
 document.body.onpointerup = () => {
+  stopDrone();
   pointerDown = null;
 };
 
 document.body.onpointercancel = () => {
+  stopDrone();
   pointerDown = null;
 };
 
