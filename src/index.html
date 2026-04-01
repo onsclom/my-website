@@ -4,54 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>onsclom</title>
+    <link rel="stylesheet" href="../public/global.css" />
     <script type="module" src="./index.ts"></script>
     <style>
-      :root {
-        --color-text: #111;
-        --color-bg: rgba(254, 254, 254, 0.5);
-        --color-selection-bg: #111;
-        --color-selection-text: #fefefe;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --color-text: #eee;
-          --color-bg: rgba(17, 17, 17, 0.5);
-          --color-selection-bg: #eee;
-          --color-selection-text: #111;
-        }
-      }
-
-      html {
-        background: #fefefe;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        html {
-          background: #111;
-        }
-      }
-
-      * {
-        margin: 0;
-        line-height: 1;
-        font-family:
-          ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-          "DejaVu Sans Mono", monospace;
-        color: var(--color-text);
-        font-size: 1rem;
-
-        /*make highlighting black and white*/
-        -webkit-text-fill-color: var(--color-text);
-        -webkit-text-stroke-width: 0.003em;
-        -webkit-text-stroke-color: var(--color-text);
-      }
-
-      * ::selection {
-        background: var(--color-selection-bg);
-        color: var(--color-selection-text);
-      }
-
       canvas {
         position: fixed;
         top: 0px;
@@ -67,9 +22,6 @@
       }
 
       body {
-        margin-left: 2ch;
-        margin-top: 1lh;
-        color: var(--color-text);
         flex-direction: column;
         position: relative;
         z-index: 3;
@@ -77,14 +29,6 @@
 
       body > *:not(canvas) {
         position: relative;
-      }
-
-      /*increase margin-left on larger screens*/
-      @media (min-width: 600px) {
-        body {
-          margin-left: 4ch;
-          margin-top: 2lh;
-        }
       }
 
       h1,
@@ -99,9 +43,6 @@
         backdrop-filter: blur(2px);
       }
 
-      h1::before {
-        content: "# ";
-      }
       h2::before {
         content: "## ";
       }
@@ -169,9 +110,9 @@
     <div class="spacer"></div>
 
     <p class="links">
+      <a href="/posts">writing</a>
       <a href="https://github.com/onsclom">github</a>
       <a href="https://www.youtube.com/@AustinMerrick">youtube</a>
-      <a href="https://www.onsclom.net/posts">writing</a>
     </p>
   </body>
 </html>

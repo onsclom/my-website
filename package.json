@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun src/index.html --console --sourcemap",
-    "build": "bun build src/index.html --outdir=dist",
+    "dev": "bun scripts/dev.ts",
+    "build": "bun scripts/build.ts",
     "preview": "bunx serve dist"
   },
   "devDependencies": {
@@ -14,5 +14,7 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "marked": "^17.0.5"
+  }
 }
