@@ -6,7 +6,7 @@ let lastTime = performance.now();
 
 export function startLoop(
   canvas: HTMLCanvasElement,
-  tick: (ctx: CanvasRenderingContext2D, dt: number) => void,
+  tick: (canvas: HTMLCanvasElement, dt: number) => void,
 ) {
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
@@ -29,7 +29,7 @@ export function startLoop(
 
 function startRafLoop(
   canvas: HTMLCanvasElement,
-  tick: (ctx: CanvasRenderingContext2D, dt: number) => void,
+  tick: (canvas: HTMLCanvasElement, dt: number) => void,
 ) {
   runTickStep(canvas, tick);
   requestAnimationFrame(() => startRafLoop(canvas, tick));
@@ -37,7 +37,7 @@ function startRafLoop(
 
 function runTickStep(
   canvas: HTMLCanvasElement,
-  tick: (ctx: CanvasRenderingContext2D, dt: number) => void,
+  tick: (canvas: HTMLCanvasElement, dt: number) => void,
 ) {
   const now = performance.now();
   const maxDt = 100;
@@ -46,16 +46,12 @@ function runTickStep(
   lastTime = now;
 
   const canvasRect = canvas.getBoundingClientRect();
-  canvas.width = canvasRect.width * devicePixelRatio;
-  canvas.height = canvasRect.height * devicePixelRatio;
+  const newW = canvasRect.width * devicePixelRatio;
+  const newH = canvasRect.height * devicePixelRatio;
+  if (canvas.width !== newW || canvas.height !== newH) {
+    canvas.width = newW;
+    canvas.height = newH;
+  }
 
-  const ctx = canvas.getContext("2d");
-  assert(ctx);
-  ctx.scale(devicePixelRatio, devicePixelRatio);
-
-  tick(ctx, dt);
-}
-
-function assert(condition: any): asserts condition {
-  if (!condition) throw new Error("Assertion failed");
+  tick(canvas, dt);
 }

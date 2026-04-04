@@ -1,4 +1,3 @@
-import { lerp } from "./lerp";
 import {
   startDrone,
   stopDrone,
@@ -7,7 +6,7 @@ import {
 } from "./drone";
 import { sinLUT, SIN_LUT_MASK, SIN_LUT_QUARTER, radToIndex } from "./sinLUT";
 
-const gridSize = 30;
+const gridSize = 25;
 
 type Square = {
   originX: number;
@@ -107,16 +106,105 @@ document.body.onpointercancel = () => {
   pointerDown = null;
 };
 
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)",
-).matches;
 const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-let opacity = prefersReducedMotion ? 1 : 0;
-const targetOpacity = 1;
 const springK = 40;
 const dampC = 7;
 
-export function tick(ctx: CanvasRenderingContext2D, dt: number) {
+const VERT_SRC = `#version 300 es
+in vec2 a_vertex;
+in vec4 a_instance; // cx, cy, sinR, cosR
+
+uniform vec2 u_resolution;
+uniform float u_half;
+
+void main() {
+  float s = a_instance.z;
+  float c = a_instance.w;
+  vec2 rotated = vec2(
+    a_vertex.x * c - a_vertex.y * s,
+    a_vertex.x * s + a_vertex.y * c
+  );
+  vec2 pos = rotated * u_half + a_instance.xy;
+  vec2 clip = (pos / u_resolution) * 2.0 - 1.0;
+  clip.y = -clip.y;
+  gl_Position = vec4(clip, 0.0, 1.0);
+}
+`;
+
+const FRAG_SRC = `#version 300 es
+precision mediump float;
+uniform vec4 u_color;
+out vec4 fragColor;
+void main() {
+  fragColor = u_color;
+}
+`;
+
+interface GLState {
+  gl: WebGL2RenderingContext;
+  program: WebGLProgram;
+  instanceBuf: WebGLBuffer;
+  uResolution: WebGLUniformLocation;
+  uHalf: WebGLUniformLocation;
+  uColor: WebGLUniformLocation;
+}
+
+let glState: GLState | null = null;
+let instanceData = new Float32Array(0);
+
+function compileShader(
+  gl: WebGL2RenderingContext,
+  type: number,
+  src: string,
+): WebGLShader {
+  const s = gl.createShader(type)!;
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  return s;
+}
+
+function initGL(canvas: HTMLCanvasElement): GLState {
+  const gl = canvas.getContext("webgl2", { alpha: false, antialias: false })!;
+
+  const vs = compileShader(gl, gl.VERTEX_SHADER, VERT_SRC);
+  const fs = compileShader(gl, gl.FRAGMENT_SHADER, FRAG_SRC);
+  const program = gl.createProgram()!;
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+  gl.useProgram(program);
+
+  const quadBuf = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+  // prettier-ignore
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1, -1,  1, -1,  -1, 1,  1, 1
+  ]), gl.STATIC_DRAW);
+
+  const aVertex = gl.getAttribLocation(program, "a_vertex");
+  gl.enableVertexAttribArray(aVertex);
+  gl.vertexAttribPointer(aVertex, 2, gl.FLOAT, false, 0, 0);
+  gl.vertexAttribDivisor(aVertex, 0);
+
+  const instanceBuf = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, instanceBuf);
+
+  const aInstance = gl.getAttribLocation(program, "a_instance");
+  gl.enableVertexAttribArray(aInstance);
+  gl.vertexAttribPointer(aInstance, 4, gl.FLOAT, false, 0, 0);
+  gl.vertexAttribDivisor(aInstance, 1);
+
+  return {
+    gl,
+    program,
+    instanceBuf,
+    uResolution: gl.getUniformLocation(program, "u_resolution")!,
+    uHalf: gl.getUniformLocation(program, "u_half")!,
+    uColor: gl.getUniformLocation(program, "u_color")!,
+  };
+}
+
+export function tick(canvas: HTMLCanvasElement, dt: number) {
   const ageSpan = document.getElementById("age-span")!;
   const birthday = new Date("1998-04-02T00:00:00-08:00");
   const now = new Date();
@@ -124,8 +212,11 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
   const years = timeElapsed / (1000 * 60 * 60 * 24 * 365.25);
   ageSpan.textContent = years.toFixed(10);
 
-  const logicalWidth = ctx.canvas.width / devicePixelRatio;
-  const logicalHeight = ctx.canvas.height / devicePixelRatio;
+  if (!glState) glState = initGL(canvas);
+  const { gl } = glState;
+
+  const logicalWidth = canvas.width / devicePixelRatio;
+  const logicalHeight = canvas.height / devicePixelRatio;
   if (logicalWidth !== lastWidth || logicalHeight !== lastHeight) {
     allocateSquares(logicalWidth, logicalHeight);
     lastWidth = logicalWidth;
@@ -207,38 +298,58 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
     sq.offsetY += sq.velY * dtS;
   }
 
-  const dark = darkModeQuery.matches;
-  ctx.fillStyle = dark ? "#111" : "#fefefe";
-  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  ctx.fillStyle = dark ? "#1a1a1a" : "#f8f8f8";
-  ctx.strokeStyle = dark ? "#2a2a2a" : "#ddd";
+  gl.viewport(0, 0, canvas.width, canvas.height);
 
-  opacity = lerp(opacity, targetOpacity, 1 - Math.exp(-0.005 * dt));
-  ctx.globalAlpha = opacity;
-  ctx.lineWidth = 1;
+  const dark = darkModeQuery.matches;
+
+  if (dark) {
+    gl.clearColor(0x11 / 255, 0x11 / 255, 0x11 / 255, 1);
+  } else {
+    gl.clearColor(0xfe / 255, 0xfe / 255, 0xfe / 255, 1);
+  }
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
+  gl.useProgram(glState.program);
+  gl.uniform2f(glState.uResolution, logicalWidth, logicalHeight);
+
+  // Build instance data: [cx, cy, sin, cos] per square
+  const count = squares.length;
+  if (instanceData.length < count * 4) {
+    instanceData = new Float32Array(count * 4);
+  }
 
   const half = (gridSize / 2) * 0.4;
   const rotTimeIndex = radToIndex(now2 * 0.00025);
 
-  ctx.beginPath();
+  let i = 0;
   for (const sq of squares) {
     const cx = sq.originX + sq.offsetX;
     const cy = sq.originY + sq.offsetY;
-
     const rotIndex = (sq.rotPhaseIndex + rotTimeIndex) & SIN_LUT_MASK;
-    const s = sinLUT[rotIndex]!;
-    const c = sinLUT[(rotIndex + SIN_LUT_QUARTER) & SIN_LUT_MASK]!;
-    const hc = half * c;
-    const hs = half * s;
-
-    ctx.moveTo(cx - hc + hs, cy - hs - hc);
-    ctx.lineTo(cx + hc + hs, cy + hs - hc);
-    ctx.lineTo(cx + hc - hs, cy + hs + hc);
-    ctx.lineTo(cx - hc - hs, cy - hs + hc);
-    ctx.closePath();
+    instanceData[i] = cx;
+    instanceData[i + 1] = cy;
+    instanceData[i + 2] = sinLUT[rotIndex]!;
+    instanceData[i + 3] = sinLUT[(rotIndex + SIN_LUT_QUARTER) & SIN_LUT_MASK]!;
+    i += 4;
   }
-  ctx.fill();
-  ctx.stroke();
 
-  ctx.globalAlpha = 0.1;
+  gl.bindBuffer(gl.ARRAY_BUFFER, glState.instanceBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, instanceData, gl.DYNAMIC_DRAW);
+
+  const strokeHalf = half + 1.0;
+  gl.uniform1f(glState.uHalf, strokeHalf);
+  if (dark) {
+    gl.uniform4f(glState.uColor, 0x2a / 255, 0x2a / 255, 0x2a / 255, 1);
+  } else {
+    gl.uniform4f(glState.uColor, 0xdd / 255, 0xdd / 255, 0xdd / 255, 1);
+  }
+  gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, count);
+
+  gl.uniform1f(glState.uHalf, half);
+  if (dark) {
+    gl.uniform4f(glState.uColor, 0x1a / 255, 0x1a / 255, 0x1a / 255, 1);
+  } else {
+    gl.uniform4f(glState.uColor, 0xf8 / 255, 0xf8 / 255, 0xf8 / 255, 1);
+  }
+  gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, count);
 }
