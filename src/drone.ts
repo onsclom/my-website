@@ -1,7 +1,7 @@
 // ── Tuning knobs ──────────────────────────────────────────────
 
-export const ATTACK_TIME = 0.4;
-export const RELEASE_TIME = 0.8;
+export const ATTACK_TIME = 0.2;
+export const RELEASE_TIME = 0.4;
 
 const MASTER_VOLUME = 0.2;
 
@@ -69,6 +69,19 @@ interface DroneState {
 }
 
 let droneState: DroneState | null = null;
+let analyser: AnalyserNode | null = null;
+let analyserData: Uint8Array<ArrayBuffer> | null = null;
+
+export function getDroneVolume(): number {
+  if (!analyser || !analyserData) return 0;
+  analyser.getByteTimeDomainData(analyserData);
+  let sum = 0;
+  for (let i = 0; i < analyserData.length; i++) {
+    const v = (analyserData[i]! - 128) / 128;
+    sum += v * v;
+  }
+  return Math.sqrt(sum / analyserData.length);
+}
 
 function getCtx(): AudioContext {
   if (!audioCtx) audioCtx = new AudioContext();
@@ -86,6 +99,11 @@ export function startDrone(): void {
   const masterGain = ctx.createGain();
   masterGain.gain.setValueAtTime(0, t);
   masterGain.gain.linearRampToValueAtTime(MASTER_VOLUME, t + ATTACK_TIME);
+
+  analyser = ctx.createAnalyser();
+  analyser.fftSize = 256;
+  analyserData = new Uint8Array(analyser.fftSize);
+  masterGain.connect(analyser);
   masterGain.connect(ctx.destination);
 
   const comp = ctx.createDynamicsCompressor();
@@ -168,6 +186,8 @@ export function stopDrone(): void {
   const ctx = audioCtx;
   const t = ctx.currentTime;
   droneState = null;
+  analyser = null;
+  analyserData = null;
 
   masterGain.gain.cancelScheduledValues(t);
   masterGain.gain.setValueAtTime(masterGain.gain.value, t);

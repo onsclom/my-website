@@ -1,5 +1,10 @@
 import { lerp } from "./lerp";
-import { startDrone, stopDrone, setDronePointer } from "./drone";
+import {
+  startDrone,
+  stopDrone,
+  setDronePointer,
+  getDroneVolume,
+} from "./drone";
 import { sinLUT, SIN_LUT_MASK, SIN_LUT_QUARTER, radToIndex } from "./sinLUT";
 
 const gridSize = 30;
@@ -131,11 +136,15 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
 
   if (pointerDown) {
     const { x: px, y: py } = pointerDown;
-    const effectDistance = 150;
+    const effectDist2 = 150 * 150;
+    const invEffectDist = 1 / 150;
     for (const sq of squares) {
-      const dist = Math.hypot(sq.originX - px, sq.originY - py);
-      if (dist < effectDistance) {
-        const effect = (1 - dist / effectDistance) ** 2 * 30 * dtS;
+      const ddx = sq.originX - px;
+      const ddy = sq.originY - py;
+      const dist2 = ddx * ddx + ddy * ddy;
+      if (dist2 < effectDist2) {
+        const t = 1 - Math.sqrt(dist2) * invEffectDist;
+        const effect = t * t * 30 * dtS;
         sq.velX += (px - sq.originX) * effect;
         sq.velY += (py - sq.originY) * effect;
       }
@@ -145,18 +154,51 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
   if (pendingMove) {
     const { dx, dy, px, py } = pendingMove;
     pendingMove = null;
-    const effectDistance = 100;
+    const effectDist2 = 100 * 100;
+    const invEffectDist = 1 / 100;
     for (const sq of squares) {
-      const dist = Math.hypot(sq.originX - px, sq.originY - py);
-      if (dist < effectDistance) {
-        const effect = (1 - dist / effectDistance) ** 2 * 8;
+      const ddx = sq.originX - px;
+      const ddy = sq.originY - py;
+      const dist2 = ddx * ddx + ddy * ddy;
+      if (dist2 < effectDist2) {
+        const t = 1 - Math.sqrt(dist2) * invEffectDist;
+        const effect = t * t * 8;
         sq.velX += dx * effect;
         sq.velY += dy * effect;
       }
     }
   }
 
+  const droneVol = getDroneVolume();
+  const now2 = performance.now();
+  const waveTimeIndex = radToIndex(now2 * 0.001);
+
+  const pnx = pointerDown ? pointerDown.x / logicalWidth : 0.5;
+  const pny = pointerDown ? pointerDown.y / logicalHeight : 0.5;
+  const waveAngleIdx = radToIndex((pnx - 0.5) * Math.PI);
+  const waveDirX = sinLUT[waveAngleIdx]!;
+  const waveDirY = sinLUT[(waveAngleIdx + SIN_LUT_QUARTER) & SIN_LUT_MASK]!;
+  const freqScale = 0.8 + pny * 0.4;
+  const pointerPhaseOffset = radToIndex((pnx + pny) * 20);
+
+  const waveStrength = droneVol * 128000;
+  const waveForceY = waveStrength * dtS;
+  const waveForceX = waveForceY * waveDirX * 0.5;
+  const spatialScaleX = waveDirX * freqScale;
+  const spatialScaleY = waveDirY * freqScale;
+
   for (const sq of squares) {
+    if (waveStrength > 0.1) {
+      const spatialPhase =
+        sq.originX * spatialScaleX + sq.originY * spatialScaleY;
+      const idx =
+        (radToIndex(spatialPhase) + waveTimeIndex + pointerPhaseOffset) &
+        SIN_LUT_MASK;
+      const wave = sinLUT[idx]!;
+      sq.velY += wave * waveForceY;
+      sq.velX += wave * waveForceX;
+    }
+
     const accX = -springK * sq.offsetX - dampC * sq.velX;
     const accY = -springK * sq.offsetY - dampC * sq.velY;
     sq.velX += accX * dtS;
@@ -176,20 +218,16 @@ export function tick(ctx: CanvasRenderingContext2D, dt: number) {
   ctx.lineWidth = 1;
 
   const half = (gridSize / 2) * 0.4;
-  const now2 = performance.now();
-  const waveTimeIndex = radToIndex(now2 * 0.001);
   const rotTimeIndex = radToIndex(now2 * 0.00025);
 
   ctx.beginPath();
   for (const sq of squares) {
-    const waveY =
-      -(sinLUT[(sq.phaseIndex + waveTimeIndex) & SIN_LUT_MASK] ?? 0) * 5;
     const cx = sq.originX + sq.offsetX;
-    const cy = sq.originY + waveY + sq.offsetY;
+    const cy = sq.originY + sq.offsetY;
 
     const rotIndex = (sq.rotPhaseIndex + rotTimeIndex) & SIN_LUT_MASK;
-    const s = sinLUT[rotIndex] ?? 0;
-    const c = sinLUT[(rotIndex + SIN_LUT_QUARTER) & SIN_LUT_MASK] ?? 0;
+    const s = sinLUT[rotIndex]!;
+    const c = sinLUT[(rotIndex + SIN_LUT_QUARTER) & SIN_LUT_MASK]!;
     const hc = half * c;
     const hs = half * s;
 
