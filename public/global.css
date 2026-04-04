@@ -57,6 +57,22 @@ body {
 
 a {
   color: var(--color-text);
+  text-underline-offset: 0.15em;
+  text-decoration-color: rgba(17, 17, 17, 0.3);
+  transition: text-decoration-color 0.2s ease;
+}
+
+a:hover {
+  text-decoration-color: rgba(17, 17, 17, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    text-decoration-color: rgba(238, 238, 238, 0.3);
+  }
+  a:hover {
+    text-decoration-color: rgba(238, 238, 238, 0.8);
+  }
 }
 
 h1::before {
