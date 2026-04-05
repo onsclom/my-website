@@ -97,6 +97,11 @@ body {
 }
 
 /* posts listing */
+.posts-listing {
+  text-transform: lowercase;
+}
+
+/* posts listing */
 .posts-list {
   list-style: none;
   padding: 0;

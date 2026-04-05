@@ -19,9 +19,9 @@ function parseFrontmatter(raw: string): {
   attrs: { title: string; pubDate: string };
   body: string;
 } {
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   if (!match) throw new Error("Invalid frontmatter");
-  const lines = match[1]!.split("\n");
+  const lines = match[1]!.split(/\r?\n/);
   const attrs: Record<string, string> = {};
   for (const line of lines) {
     const idx = line.indexOf(":");
@@ -44,7 +44,7 @@ function formatDate(date: Date): string {
   });
 }
 
-function htmlPage(title: string, body: string): string {
+function htmlPage(title: string, body: string, bodyClass?: string): string {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -54,7 +54,7 @@ function htmlPage(title: string, body: string): string {
   <link rel="stylesheet" href="/global.css" />
   <style>${STYLES}</style>
 </head>
-<body>
+<body${bodyClass ? ` class="${bodyClass}"` : ""}>
   ${body}
 </body>
 </html>`;
@@ -96,6 +96,7 @@ function postsListingPage(posts: Post[]): string {
   <ul class="posts-list">
     ${items}
   </ul>`,
+    "posts-listing",
   );
 }
 
