@@ -11,7 +11,7 @@ body {
 }
 
 .post-header {
-  margin-bottom: 1lh;
+  margin-bottom: 2lh;
 }
 
 .post-header h1::before {
@@ -93,12 +93,16 @@ body {
 
 .back-link {
   display: inline-block;
-  margin-bottom: 1lh;
+  margin-bottom: 1.5lh;
 }
 
 /* posts listing */
 .posts-listing {
   text-transform: lowercase;
+}
+
+.posts-listing h1 {
+  margin-bottom: 0;
 }
 
 /* posts listing */

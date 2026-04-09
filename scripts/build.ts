@@ -92,7 +92,7 @@ function postsListingPage(posts: Post[]): string {
     "writing",
     `<a href="/" class="back-link">&larr; home</a>
   <h1>writing</h1>
-  <div style="height: 1lh"></div>
+  <div style="height: 1.5lh" aria-hidden="true"></div>
   <ul class="posts-list">
     ${items}
   </ul>`,
