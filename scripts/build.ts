@@ -131,7 +131,7 @@ function vercelPage(): string {
   <ul class="vercel-list">
     <li><a href="https://vercel.com/changelog/automatic-pnpm-v10-support">automatic pnpm v10 support</a></li>
     <li><a href="https://vercel.com/changelog/improved-support-for-pnpm-corepack-and-monorepos">improved support for pnpm, corepack, and monorepos</a></li>
-    <li><a href="https://vercel.com/changelog/yarn-2-dependency-caching-now-supported">yarn 2 dependency caching now supported</a></li>
+    <li><a href="https://vercel.com/changelog/yarn-2-dependency-caching-now-supported">yarn 2+ dependency caching now supported</a></li>
     <li><a href="https://vercel.com/changelog/buns-text-lockfile-is-now-supported-with-zero-configuration">bun's text lockfile is now supported with zero configuration</a></li>
   </ul>`,
     "vercel-page",
