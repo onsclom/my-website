@@ -100,6 +100,50 @@ function postsListingPage(posts: Post[]): string {
   );
 }
 
+function vercelPage(): string {
+  return htmlPage(
+    "vercel work",
+    `<a href="/" class="back-link">&larr; home</a>
+  <h1>vercel work</h1>
+  <p class="vercel-subtitle">austin merrick</p>
+
+  <div style="height: 1.5lh" aria-hidden="true"></div>
+
+  <h2>framework support</h2>
+  <ul class="vercel-list">
+    <li><a href="https://vercel.com/changelog/support-for-tanstack-start">support for tanstack start</a></li>
+    <li><a href="https://vercel.com/changelog/zero-configuration-support-for-fastify">zero-configuration support for fastify</a></li>
+    <li><a href="https://vercel.com/changelog/zero-configuration-support-for-nitro">zero-configuration support for nitro</a></li>
+    <li><a href="https://vercel.com/changelog/zero-configuration-support-for-nestjs">zero-configuration support for nestjs</a></li>
+  </ul>
+
+  <div style="height: 0.5lh" aria-hidden="true"></div>
+
+  <h2>cli & performance</h2>
+  <ul class="vercel-list">
+    <li><a href="https://vercel.com/changelog/split-tgz-is-now-the-default-cli-archive-deployment-behavior">split tgz is now the default cli archive deployment behavior</a></li>
+    <li><a href="https://vercel.com/changelog/cli-archive-deployments-are-now-up-to-30-faster-with-split-tgz-archive">cli archive deployments are now up to 30% faster with split tgz archive</a></li>
+  </ul>
+
+  <div style="height: 0.5lh" aria-hidden="true"></div>
+
+  <h2>package management</h2>
+  <ul class="vercel-list">
+    <li><a href="https://vercel.com/changelog/automatic-pnpm-v10-support">automatic pnpm v10 support</a></li>
+    <li><a href="https://vercel.com/changelog/yarn-2-dependency-caching-now-supported">yarn 2 dependency caching now supported</a></li>
+    <li><a href="https://vercel.com/changelog/buns-text-lockfile-is-now-supported-with-zero-configuration">bun's text lockfile is now supported with zero configuration</a></li>
+  </ul>`,
+    "vercel-page",
+  );
+}
+
+export async function buildVercel() {
+  const dir = join(DIST_DIR, "vercel");
+  await mkdir(dir, { recursive: true });
+  await writeFile(join(dir, "index.html"), vercelPage());
+  console.log("Built vercel page");
+}
+
 export async function buildPosts() {
   const marked = new Marked();
 
@@ -165,6 +209,9 @@ export async function buildSite() {
 
   // build markdown posts
   await buildPosts();
+
+  // build vercel page
+  await buildVercel();
 
   console.log("Build complete!");
 }

@@ -123,4 +123,39 @@ body {
   opacity: 0.6;
   margin-top: 0.25lh;
 }
+
+/* vercel page */
+.vercel-page {
+  text-transform: lowercase;
+}
+
+.vercel-page h1 {
+  margin-bottom: 0;
+}
+
+.vercel-page .vercel-subtitle {
+  opacity: 0.6;
+  margin-top: 0.25lh;
+}
+
+.vercel-page h2::before {
+  content: "## ";
+}
+
+.vercel-page h2 {
+  margin-bottom: 0.5lh;
+}
+
+.vercel-list {
+  list-style: none;
+  padding: 0;
+}
+
+.vercel-list li {
+  margin-bottom: 0.5lh;
+}
+
+.vercel-list li::before {
+  content: "→ ";
+}
 `;
