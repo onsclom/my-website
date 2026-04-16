@@ -102,9 +102,9 @@ function postsListingPage(posts: Post[]): string {
 
 function vercelPage(): string {
   return htmlPage(
-    "vercel work",
+    "vercel changelogs",
     `<a href="/" class="back-link">&larr; home</a>
-  <h1>vercel work</h1>
+  <h1>vercel changelogs</h1>
   <p class="vercel-subtitle">austin merrick</p>
 
   <div style="height: 1.5lh" aria-hidden="true"></div>
