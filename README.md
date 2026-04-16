@@ -1,15 +1,12 @@
-# canvas-basics
+# onsclom.net
 
-To install dependencies:
+My personal site, built with [Bun](https://bun.com).
 
-```bash
-bun install
-```
-
-To run:
+## Scripts
 
 ```bash
-bun run index.ts
+bun install       # install dependencies
+bun run dev       # start the dev server
+bun run build     # build the site to dist/
+bun run preview   # serve the built site
 ```
-
-This project was created using `bun init` in bun v1.2.21. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
