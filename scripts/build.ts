@@ -1,5 +1,6 @@
 import { readdir, readFile, writeFile, mkdir, cp, rm } from "fs/promises";
 import { join } from "path";
+import { Marked } from "marked";
 import { STYLES } from "./styles";
 
 const CONTENT_DIR = join(import.meta.dir, "../content/posts");
@@ -146,6 +147,8 @@ export async function buildVercel() {
 }
 
 export async function buildPosts() {
+  const marked = new Marked();
+
   // read all posts
   const files = await readdir(CONTENT_DIR);
   const mdFiles = files.filter((f) => f.endsWith(".md"));
@@ -154,12 +157,10 @@ export async function buildPosts() {
   for (const file of mdFiles) {
     const raw = await readFile(join(CONTENT_DIR, file), "utf-8");
     const { attrs, body } = parseFrontmatter(raw);
-    const content = Bun.markdown
-      .html(body)
-      .replace(
-        /<table>([\s\S]*?)<\/table>/g,
-        '<div class="table-wrap"><table>$1</table></div>',
-      );
+    const content = (await marked.parse(body)).replace(
+      /<table>([\s\S]*?)<\/table>/g,
+      '<div class="table-wrap"><table>$1</table></div>',
+    );
     const slug = file.replace(/\.md$/, "");
     posts.push({
       slug,
