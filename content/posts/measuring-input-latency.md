@@ -7,6 +7,8 @@ Each trial was filmed on an **iPhone SE** in 240 fps slow-motion mode, then the 
 between the spacebar starting to depress and the on-screen response were counted.
 One frame ≈ **4.17 ms**. Every runtime/configuration was sampled **20 times**.
 
+Source code for the test programs: [onsclom/input-latency-test](https://github.com/onsclom/input-latency-test).
+
 Hardware:
 - **OSX**: M1 MacBook (built-in display)
 - **Windows**: gaming PC paired with a gaming monitor
