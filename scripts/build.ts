@@ -40,6 +40,7 @@ function formatDate(date: Date): string {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -153,7 +154,12 @@ export async function buildPosts() {
   for (const file of mdFiles) {
     const raw = await readFile(join(CONTENT_DIR, file), "utf-8");
     const { attrs, body } = parseFrontmatter(raw);
-    const content = Bun.markdown.html(body);
+    const content = Bun.markdown
+      .html(body)
+      .replace(
+        /<table>([\s\S]*?)<\/table>/g,
+        '<div class="table-wrap"><table>$1</table></div>',
+      );
     const slug = file.replace(/\.md$/, "");
     posts.push({
       slug,

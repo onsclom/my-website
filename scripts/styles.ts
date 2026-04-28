@@ -24,7 +24,7 @@ body {
   margin-top: 0.5lh;
 }
 
-.post-content {
+.post-content > *:not(.table-wrap) {
   max-width: 70ch;
 }
 
@@ -89,6 +89,44 @@ body {
   padding-left: 2ch;
   margin-bottom: 1lh;
   opacity: 0.8;
+}
+
+.post-content .table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1lh;
+  width: max-content;
+  max-width: 100%;
+}
+
+.post-content table {
+  border-collapse: collapse;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.4lh 1.5ch;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.post-content th {
+  border-bottom: 1px solid var(--color-text);
+  font-weight: bold;
+}
+
+.post-content tbody tr:nth-child(even) {
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.post-content th[align="right"],
+.post-content td[align="right"] {
+  text-align: right;
+}
+
+.post-content th[align="center"],
+.post-content td[align="center"] {
+  text-align: center;
 }
 
 .back-link {
